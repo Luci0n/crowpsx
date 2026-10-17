@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Render pipelines | CrowPSX Documentation</title><meta content="Built-in and URP compatibility, renderer features, and setup differences." name="description"/><meta content="#11120f" name="theme-color"/><meta content="index,follow" name="robots"/><link href="https://luci0n.github.io/crowpsx/docs/render-pipelines/" rel="canonical"/><meta content="website" property="og:type"/><meta content="Render pipelines | CrowPSX Documentation" property="og:title"/><meta content="Built-in and URP compatibility, renderer features, and setup differences." property="og:description"/><meta content="https://luci0n.github.io/crowpsx/docs/render-pipelines/" property="og:url"/><meta content="https://luci0n.github.io/crowpsx/assets/street.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><link href="/crowpsx/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/crowpsx/style.css" rel="stylesheet"/><script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "CrowPSX", "url": "https://luci0n.github.io/crowpsx", "publisher": {"@type": "Organization", "name": "CrowBite"}}]</script><link href="/crowpsx/docs.css" rel="stylesheet"/><script defer="" src="/crowpsx/docs.js"></script><meta content="/crowpsx" name="site-base"/><link href="/crowpsx/refresh.css" rel="stylesheet"/></head><body class="docs-body"><a class="skip" href="#main">Skip to content</a><main id="main"><header class="docs-header"><a aria-label="CrowPSX home" class="brand" href="/crowpsx/">Crow<span>PSX</span></a><a class="docs-wordmark" href="/crowpsx/docs/">Documentation</a><span class="docs-version">v1.1.0</span><div class="docs-search"><label class="sr-only" for="docs-query">Search documentation</label><span aria-hidden="true">⌕</span><input aria-controls="search-results" aria-expanded="false" autocomplete="off" id="docs-query" placeholder="Search documentation…" type="search"/><kbd>Ctrl K</kbd><div class="search-panel" hidden="" id="search-panel"><p aria-live="polite" id="search-count" role="status"></p><ul aria-label="Search results" id="search-results"></ul></div></div><a class="docs-store" href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Get CrowPSX ↗</a><button aria-controls="docs-sidebar" aria-expanded="false" aria-label="Browse documentation" class="nav-toggle" type="button">☰ <span>Browse docs</span></button></header><div class="docs-layout"><nav aria-label="Documentation" class="docs-sidebar" id="docs-sidebar"><div class="nav-group"><p>START HERE</p><a href="/crowpsx/docs/">Overview</a><a href="/crowpsx/docs/installation/">Installation</a><a href="/crowpsx/docs/getting-started/">Getting started</a><a aria-current="page" href="/crowpsx/docs/render-pipelines/">Render pipelines</a></div><div class="nav-group"><p>SHADER REFERENCE</p><a href="/crowpsx/docs/surface-shaders/">Surface shaders</a><a href="/crowpsx/docs/nature/">Nature &amp; wind</a><a href="/crowpsx/docs/terrain/">Terrain</a><a href="/crowpsx/docs/particles/">Particles</a><a href="/crowpsx/docs/decals/">Depth-volume decals</a><a href="/crowpsx/docs/skybox/">Procedural skybox</a></div><div class="nav-group"><p>MATERIAL WORKFLOWS</p><a href="/crowpsx/docs/surface-controls/">Lighting &amp; retro controls</a><a href="/crowpsx/docs/pbr-workflows/">PBR workflows</a><a href="/crowpsx/docs/vertex-painting/">Vertex painting</a><a href="/crowpsx/docs/material-manager/">Material Manager</a><a href="/crowpsx/docs/baking-transparency/">Baking &amp; transparency</a></div><div class="nav-group"><p>INTEGRATION</p><a href="/crowpsx/docs/vr-stereo/">VR &amp; stereo</a><a href="/crowpsx/docs/demo-scene/">Demo scene</a></div><div class="nav-group"><p>REFERENCE</p><a href="/crowpsx/docs/performance/">Performance</a><a href="/crowpsx/docs/troubleshooting/">Troubleshooting</a><a href="/crowpsx/docs/changelog/">Changelog</a></div><div class="sidebar-footer"><a href="/crowpsx/">← Product website</a><span>Built-in + URP</span></div></nav><div class="docs-page"><div class="doc-breadcrumb"><a href="/crowpsx/docs/">Docs</a><span>/</span><span>Render pipelines</span></div><article class="doc-article"><div class="doc-heading"><p class="eyebrow">START HERE</p><h1>Render pipelines</h1><p>Built-in and URP compatibility, renderer features, and setup differences.</p><span>PACKAGE VERSION 1.1.0</span></div><details class="mobile-toc"><summary>On this page</summary><a href="#built-in-and-urp">Built-in and URP</a><a href="#version-and-platform-checks">Version and platform checks</a><a href="#after-changing-pipelines">After changing pipelines</a></details><div class="doc-content"><h2 id="built-in-and-urp">Built-in and URP<a aria-label="Link to Built-in and URP" class="heading-anchor" href="#built-in-and-urp">#</a></h2>
+<p>Every lit CrowPSX shader includes a Universal and a Built-in SubShader in the same asset. Unity automatically selects the one for the active pipeline, so you can keep the same materials when switching between Built-in and URP.</p>
+<p>Most features work the same way in both pipelines. These features have different setup requirements:</p>
+<div aria-label="Render pipelines table" class="doc-table" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Built-in</th>
+<th>Universal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Particles/Grab Distortion</code></td>
+<td>Refracts through GrabPass</td>
+<td>Needs <strong>Opaque Texture</strong> on the URP Asset</td>
+</tr>
+<tr>
+<td><code>Decals/Depth Volume</code></td>
+<td>Reads scene depth directly</td>
+<td>Needs the <strong>CrowPSX Depth Volume</strong> renderer feature</td>
+</tr>
+<tr>
+<td><code>Terrain/PBR</code></td>
+<td>Built-in Terrain add-pass and basemap shaders</td>
+<td>URP's terrain contract</td>
+</tr>
+<tr>
+<td>Additional realtime lights</td>
+<td>One ForwardAdd pass per light</td>
+<td>Looped inside the single forward pass</td>
+</tr>
+<tr>
+<td>Bakery alpha-meta</td>
+<td>Separate pass, hidden from Unity's lightmapper</td>
+<td>Folded into the single Meta pass</td>
+</tr>
+</tbody>
+</table></div>
+<p>Under URP, depth-volume decals need the <strong>CrowPSX Depth Volume</strong> renderer feature on the active Universal Renderer, or they drift as the camera moves. Select a Depth Volume material and use the inspector's <strong>Add To Renderer</strong> action; the installation validator also reports it. Builds automatically strip passes for the unused pipeline. Add <code>CROWPSX_DISABLE_VARIANT_STRIPPING</code> to turn that off.</p>
+<p>Optional mesh-surface outlines are controlled directly from each material, including screen-fixed/world-space width, distance fade, a UV mask, sampled base-color matching, and UV4-baked smooth outline normals for closing hard-edge gaps without changing surface shading. Built-in needs no setup. In URP, add <strong>CrowPSX Outline Feature</strong> to the active Universal Renderers to enable outlines on their cameras. Alternatively, add <strong>CrowPSX Outline Support</strong> to a camera for scene-level setup without editing the renderer asset.</p>
+<h2 id="version-and-platform-checks">Version and platform checks<a aria-label="Link to Version and platform checks" class="heading-anchor" href="#version-and-platform-checks">#</a></h2>
+<p>CrowPSX requires Unity 2022.3 LTS or newer and has been tested on Unity 2022.3, 6.0, 6.3, and 6.6. HDRP shaders are not included. Use a Shader Model 3.5-capable target for the main surface, particle, and decal shaders.</p>
+<p>Before integrating CrowPSX into a larger project, test a representative scene with your Unity and URP versions, renderer, graphics API, and target hardware.</p>
+<h2 id="after-changing-pipelines">After changing pipelines<a aria-label="Link to After changing pipelines" class="heading-anchor" href="#after-changing-pipelines">#</a></h2>
+<p>Wait for compilation and run <code>Tools &gt; CrowPSX &gt; Validate Installation</code>. Check the active Universal Renderer when using decals or outlines, and enable Opaque Texture when using URP Grab Distortion.</p>
+<p>If generated pipeline detection falls out of step, use <code>Tools &gt; CrowPSX &gt; Regenerate Pipeline Defines</code>. See <a href="/crowpsx/docs/troubleshooting/">Troubleshooting</a> for include errors and camera-depth issues.</p>
+</div></article><nav aria-label="Previous and next documentation pages" class="doc-pager"><a href="/crowpsx/docs/getting-started/"><small>Previous</small><span>Getting started </span></a><a href="/crowpsx/docs/surface-shaders/"><small>Next</small><span>Surface shaders →</span></a></nav><div class="doc-footnote">CrowPSX 1.1.0 · CrowBite<br/>Shader reference and setup guides.</div></div><aside aria-label="On this page" class="docs-toc"><p>ON THIS PAGE</p><a href="#built-in-and-urp">Built-in and URP</a><a href="#version-and-platform-checks">Version and platform checks</a><a href="#after-changing-pipelines">After changing pipelines</a><div class="toc-help"><p>Something not working?</p><a href="/crowpsx/docs/troubleshooting/">Troubleshooting →</a></div></aside></div></main><dialog id="lightbox"><button aria-label="Close image" class="close">×</button><img alt=""/><p></p></dialog></body></html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Demo scene | CrowPSX Documentation</title><meta content="Demo controls, input systems, camera scripts, and outline setup." name="description"/><meta content="#11120f" name="theme-color"/><meta content="index,follow" name="robots"/><link href="https://luci0n.github.io/crowpsx/docs/demo-scene/" rel="canonical"/><meta content="website" property="og:type"/><meta content="Demo scene | CrowPSX Documentation" property="og:title"/><meta content="Demo controls, input systems, camera scripts, and outline setup." property="og:description"/><meta content="https://luci0n.github.io/crowpsx/docs/demo-scene/" property="og:url"/><meta content="https://luci0n.github.io/crowpsx/assets/street.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><link href="/crowpsx/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/crowpsx/style.css" rel="stylesheet"/><script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "CrowPSX", "url": "https://luci0n.github.io/crowpsx", "publisher": {"@type": "Organization", "name": "CrowBite"}}]</script><link href="/crowpsx/docs.css" rel="stylesheet"/><script defer="" src="/crowpsx/docs.js"></script><meta content="/crowpsx" name="site-base"/><link href="/crowpsx/refresh.css" rel="stylesheet"/></head><body class="docs-body"><a class="skip" href="#main">Skip to content</a><main id="main"><header class="docs-header"><a aria-label="CrowPSX home" class="brand" href="/crowpsx/">Crow<span>PSX</span></a><a class="docs-wordmark" href="/crowpsx/docs/">Documentation</a><span class="docs-version">v1.1.0</span><div class="docs-search"><label class="sr-only" for="docs-query">Search documentation</label><span aria-hidden="true">⌕</span><input aria-controls="search-results" aria-expanded="false" autocomplete="off" id="docs-query" placeholder="Search documentation…" type="search"/><kbd>Ctrl K</kbd><div class="search-panel" hidden="" id="search-panel"><p aria-live="polite" id="search-count" role="status"></p><ul aria-label="Search results" id="search-results"></ul></div></div><a class="docs-store" href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Get CrowPSX ↗</a><button aria-controls="docs-sidebar" aria-expanded="false" aria-label="Browse documentation" class="nav-toggle" type="button">☰ <span>Browse docs</span></button></header><div class="docs-layout"><nav aria-label="Documentation" class="docs-sidebar" id="docs-sidebar"><div class="nav-group"><p>START HERE</p><a href="/crowpsx/docs/">Overview</a><a href="/crowpsx/docs/installation/">Installation</a><a href="/crowpsx/docs/getting-started/">Getting started</a><a href="/crowpsx/docs/render-pipelines/">Render pipelines</a></div><div class="nav-group"><p>SHADER REFERENCE</p><a href="/crowpsx/docs/surface-shaders/">Surface shaders</a><a href="/crowpsx/docs/nature/">Nature &amp; wind</a><a href="/crowpsx/docs/terrain/">Terrain</a><a href="/crowpsx/docs/particles/">Particles</a><a href="/crowpsx/docs/decals/">Depth-volume decals</a><a href="/crowpsx/docs/skybox/">Procedural skybox</a></div><div class="nav-group"><p>MATERIAL WORKFLOWS</p><a href="/crowpsx/docs/surface-controls/">Lighting &amp; retro controls</a><a href="/crowpsx/docs/pbr-workflows/">PBR workflows</a><a href="/crowpsx/docs/vertex-painting/">Vertex painting</a><a href="/crowpsx/docs/material-manager/">Material Manager</a><a href="/crowpsx/docs/baking-transparency/">Baking &amp; transparency</a></div><div class="nav-group"><p>INTEGRATION</p><a href="/crowpsx/docs/vr-stereo/">VR &amp; stereo</a><a aria-current="page" href="/crowpsx/docs/demo-scene/">Demo scene</a></div><div class="nav-group"><p>REFERENCE</p><a href="/crowpsx/docs/performance/">Performance</a><a href="/crowpsx/docs/troubleshooting/">Troubleshooting</a><a href="/crowpsx/docs/changelog/">Changelog</a></div><div class="sidebar-footer"><a href="/crowpsx/">← Product website</a><span>Built-in + URP</span></div></nav><div class="docs-page"><div class="doc-breadcrumb"><a href="/crowpsx/docs/">Docs</a><span>/</span><span>Demo scene</span></div><article class="doc-article"><div class="doc-heading"><p class="eyebrow">INTEGRATION</p><h1>Demo scene</h1><p>Demo controls, input systems, camera scripts, and outline setup.</p><span>PACKAGE VERSION 1.1.0</span></div><details class="mobile-toc"><summary>On this page</summary><a href="#controls">Controls</a><a href="#outlines-under-urp">Outlines under URP</a><a href="#input-and-ui-requirements">Input and UI requirements</a><a href="#sample-scripts">Sample scripts</a></details><div class="doc-content"><p>Open <code>Assets/CrowPSX/Demo.unity</code> to explore the included CrowPSX materials, Terrain, Nature, vertex-painted surfaces, particles, depth-volume decals, and procedural skybox in one playable scene.</p>
+<p>The demo is self-contained: every model, texture, material, sound, prefab, and lightmap it references lives inside <code>Assets/CrowPSX</code>, so it works without any other package installed.</p>
+<h2 id="controls">Controls<a aria-label="Link to Controls" class="heading-anchor" href="#controls">#</a></h2>
+<ul>
+<li><strong>WASD</strong>: move</li>
+<li><strong>Mouse</strong>: look</li>
+<li><strong>Left Shift</strong>: sprint</li>
+<li><strong>Space</strong>: jump</li>
+<li><strong>F</strong>: toggle the flashlight</li>
+<li><strong>Tab</strong>: show/hide the controls list</li>
+<li><strong>V</strong>: noclip</li>
+</ul>
+<p>The controls list fades once the player begins moving and hands over to a subtle
+bottom bar: a black gradient carrying the key prompts on the right and, whenever
+the player looks at a <code>CrowPSXInspectableObject</code>, that object's description on the left.</p>
+<h2 id="outlines-under-urp">Outlines under URP<a aria-label="Link to Outlines under URP" class="heading-anchor" href="#outlines-under-urp">#</a></h2>
+<p>The demo camera carries a <strong>CrowPSX Outline Support</strong> component. Under URP the
+outline is a separate pass that the renderer has to be told to draw, and the usual
+way to do that (a renderer feature) lives in a project asset that a scene cannot
+bring with it. The component makes the same request per camera instead, so the demo
+shows its outlines as soon as the scene is opened, in any URP project, with nothing
+configured. Under Built-in it does nothing and can stay where it is.</p>
+<h2 id="input-and-ui-requirements">Input and UI requirements<a aria-label="Link to Input and UI requirements" class="heading-anchor" href="#input-and-ui-requirements">#</a></h2>
+<p>The sample scripts work with any <strong>Active Input Handling</strong> setting. They use the legacy Input Manager when it is enabled, and read the keyboard and mouse through the Input System when it is the only backend, which is the default for new Unity 6 projects. Nothing needs to be changed in Player Settings to run the demo.</p>
+<p>The controls overlay uses Unity UI (<code>com.unity.ugui</code>), which is included in standard Unity 2022.3 and Unity 6 projects. The CrowPSX shaders themselves do not depend on the sample controller or Unity UI.</p>
+<h2 id="sample-scripts">Sample scripts<a aria-label="Link to Sample scripts" class="heading-anchor" href="#sample-scripts">#</a></h2>
+<p>The reusable demo scripts are under <code>Assets/CrowPSX/Samples/Scripts</code> in the <code>CrowPSX.Samples</code> namespace:</p>
+<ul>
+<li><code>CrowPSXFirstPersonMovement</code></li>
+<li><code>CrowPSXMouseLook</code></li>
+<li><code>CrowPSXHeadBob</code></li>
+<li><code>CrowPSXFootstepSystem</code></li>
+<li><code>CrowPSXStaminaSystem</code></li>
+<li><code>CrowPSXPlayerHUD</code></li>
+<li><code>CrowPSXInspectableObject</code></li>
+<li><code>CrowPSXTransformPath</code></li>
+<li><code>CrowPSXLightingModeTester</code></li>
+</ul>
+<p><code>CrowPSXTransformPath</code> moves an object through a list of waypoint Transforms, carrying rotation and optional scale at each one. It was built to sweep a lamp across a wall of materials: timing is either a constant speed, so a long leg takes proportionally longer and the light never appears to accelerate between segments, or a fixed number of seconds per segment when the beats matter more than the pace. It also offers smoothed or straight-line paths, Once/Loop/PingPong looping, per-segment easing, and a dwell time at each waypoint.</p>
+<p><code>CrowPSXPlayerHUD</code> builds the whole HUD in code - no canvas to wire up - and takes the
+JetBrains Mono fonts from <code>Assets/CrowPSX/Editor/Font</code>. Add <code>CrowPSXInspectableObject</code>
+to anything you want described: write its <strong>Title</strong> and <strong>Details</strong>, and the HUD
+prints them in a bordered box in the bottom-left corner, with a thin leader line
+running from the box to the object itself. The box grows to fit the text. One component
+covers a whole hierarchy - put it on the root of a multi-mesh prop and looking at
+any child reads out the same thing. A child with its own <code>CrowPSXInspectableObject</code>
+overrides the parent, and <strong>Include Children</strong> turns the inheritance off. The object
+needs a collider to be looked at; a trigger works as well as a solid one.</p>
+<p><code>CrowPSXInspectableObject</code> also switches on the CrowPSX outline of its own renderers
+while the player is looking at it, on the same detection that drives the readout.
+<strong>Highlight Outline</strong> turns the behavior off per object. The component instances
+that object's materials at startup and enables their outline pass with the outline
+itself switched off, so a prop can ship with no outline in the project and still
+light up when seen; the project's material assets are never modified. With
+<strong>Override Outline Look</strong> on it draws in <strong>Highlight Color</strong> and <strong>Highlight Width</strong>,
+and with it off the material's own outline color and width are used instead. Props
+whose shader has no outline (terrain, skybox, particles, decals) simply never
+highlight.</p>
+<p><code>CrowPSXLightingModeTester</code> shows one set of CrowPSX materials at a chosen realtime
+lighting mode without authoring a duplicate material per mode. It clones the
+materials on the renderers it drives, so the source assets are never modified.</p>
+<p>They are demonstration components rather than a required runtime dependency of the shader package.</p>
+</div></article><nav aria-label="Previous and next documentation pages" class="doc-pager"><a href="/crowpsx/docs/vr-stereo/"><small>Previous</small><span>VR &amp; stereo </span></a><a href="/crowpsx/docs/performance/"><small>Next</small><span>Performance →</span></a></nav><div class="doc-footnote">CrowPSX 1.1.0 · CrowBite<br/>Shader reference and setup guides.</div></div><aside aria-label="On this page" class="docs-toc"><p>ON THIS PAGE</p><a href="#controls">Controls</a><a href="#outlines-under-urp">Outlines under URP</a><a href="#input-and-ui-requirements">Input and UI requirements</a><a href="#sample-scripts">Sample scripts</a><div class="toc-help"><p>Something not working?</p><a href="/crowpsx/docs/troubleshooting/">Troubleshooting →</a></div></aside></div></main><dialog id="lightbox"><button aria-label="Close image" class="close">×</button><img alt=""/><p></p></dialog></body></html>

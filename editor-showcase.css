@@ -1,0 +1,31 @@
+.home-page .editor-showcase{padding:0 0 72px}
+.home-page .editor-heading{display:grid;grid-template-columns:1.7fr 1fr;align-items:end;gap:72px;margin-bottom:36px}
+.home-page .editor-heading h2{font-size:52px;letter-spacing:-2.1px;line-height:1.09;margin:0}
+.home-page .editor-heading>p{font-size:16px;line-height:1.75;color:var(--muted);margin:0 0 3px;max-width:32ch}
+.home-page .editor-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.home-page .editor-pair figure{margin:0;min-width:0}
+.home-page .editor-pair .image-open{overflow:hidden;aspect-ratio:16/10}
+.home-page .editor-pair .image-open img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+.home-page .editor-pair .image-open:hover img{transform:scale(1.025)}
+.home-page .editor-pair figure:first-child img{object-position:50% 35%}
+.home-page .editor-showcase .editor-expand{position:absolute;right:14px;bottom:13px;color:#fff;font:20px 'DM Sans';text-shadow:0 1px 6px #000;background:none;border:0;border-radius:0;width:auto;height:auto}
+.home-page .editor-pair figcaption{padding:24px 0 0}
+.home-page .editor-pair .editor-category{font:500 9px/1.6 var(--mono);letter-spacing:1.6px;color:#a7967e;margin:0 0 9px}
+.home-page .editor-pair h3{font-size:27px;line-height:1.2;letter-spacing:-.8px;margin:0 0 11px}
+.home-page .editor-pair figcaption>p:not(.editor-category){font-size:15px;line-height:1.75;color:var(--muted);margin:0;max-width:49ch}
+.home-page .editor-workflow{margin-top:64px;padding-top:56px;border-top:1px solid #ffffff18;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.45fr);gap:64px;align-items:start}
+.home-page .editor-workflow h3{font-size:39px;line-height:1.12;letter-spacing:-1.4px;margin:0 0 20px;max-width:15ch}
+.home-page .editor-workflow .editor-lead{font-size:15px;color:var(--muted);margin:0 0 27px;max-width:36ch}
+.home-page .editor-steps{list-style:none;padding:0;margin:0 0 25px;counter-reset:workflow}
+.home-page .editor-steps li{display:grid;grid-template-columns:22px 1fr;gap:15px;padding:14px 0;border-top:1px solid #ffffff18;counter-increment:workflow}
+.home-page .editor-steps li:before{content:'0' counter(workflow);font:10px/1.8 var(--mono);color:#aa8b5d;padding-top:1px}
+.home-page .editor-steps h4{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:500;letter-spacing:-.1px;line-height:1.4;margin:0 0 3px}
+.home-page .editor-steps p{color:#8f96a2;font-size:13px;line-height:1.6;margin:0}
+.home-page .editor-doc{color:#e9c58e;font-size:13px;text-decoration:none;display:inline-flex;gap:22px;align-items:center;border-bottom:1px solid #b69a6b55;padding-bottom:6px}
+.home-page .editor-doc:hover{color:white}
+.home-page .editor-manager-capture{width:100%;height:auto;display:block}
+.home-page .editor-workflow .image-open{margin-top:2px}
+.home-page .editor-showcase .editor-capture-note{font:10px var(--mono);color:#727a86;margin:13px 0 0}
+@media(max-width:1000px){.home-page .editor-heading h2{font-size:43px}.home-page .editor-heading{gap:40px}.home-page .editor-workflow{gap:36px;grid-template-columns:.85fr 1.2fr}.home-page .editor-workflow h3{font-size:33px}.home-page .editor-steps p{font-size:12px}}
+@media(max-width:760px){.home-page .editor-showcase{padding-bottom:56px}.home-page .editor-heading{display:block;margin-bottom:28px}.home-page .editor-heading h2{font-size:38px;letter-spacing:-1.3px}.home-page .editor-heading>p{margin-top:22px;font-size:15px;max-width:37ch}.home-page .editor-pair{grid-template-columns:1fr;gap:40px}.home-page .editor-pair figcaption{padding-top:20px}.home-page .editor-pair h3{font-size:25px}.home-page .editor-pair figcaption>p:not(.editor-category){font-size:14px}.home-page .editor-workflow{margin-top:44px;padding-top:36px;grid-template-columns:1fr;gap:32px}.home-page .editor-workflow h3{font-size:35px;max-width:17ch}.home-page .editor-workflow .editor-lead{max-width:40ch}.home-page .editor-steps p{font-size:13px}.home-page .editor-showcase .editor-capture-note{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.home-page .editor-pair .image-open img{transition:none}.home-page .editor-pair .image-open:hover img{transform:none}}

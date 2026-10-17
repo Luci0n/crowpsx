@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>PSX shaders for Unity: compare pipelines, features, and workflows</title>
+<meta content="Compare CrowPSX, URP-PSX, Haunted PSX Render Pipeline, and PSX Retro by render pipeline, material workflow, and setup requirements." name="description">
+<meta content="#0b0d11" name="theme-color">
+<meta content="index,follow" name="robots">
+<link href="https://luci0n.github.io/crowpsx/guides/psx-shaders-unity-comparison/" rel="canonical">
+<meta content="article" property="og:type">
+<meta content="PSX shaders for Unity: compare pipelines, features, and workflows" property="og:title">
+<meta content="Compare CrowPSX, URP-PSX, Haunted PSX Render Pipeline, and PSX Retro by render pipeline, material workflow, and setup requirements." property="og:description">
+<meta content="https://luci0n.github.io/crowpsx/guides/psx-shaders-unity-comparison/" property="og:url">
+<meta content="https://luci0n.github.io/crowpsx/assets/street.webp" property="og:image">
+<meta content="summary_large_image" name="twitter:card">
+<link href="/crowpsx/favicon.svg" rel="icon" type="image/svg+xml">
+<link href="/crowpsx/v2.css?v=8bd97ad2b5" rel="stylesheet">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "CrowPSX", "url": "https://luci0n.github.io/crowpsx", "publisher": {"@type": "Organization", "name": "CrowBite"}}, {"@context": "https://schema.org", "@type": "Article", "headline": "PSX shaders for Unity: compare pipelines, features, and workflows", "description": "Compare CrowPSX, URP-PSX, Haunted PSX Render Pipeline, and PSX Retro by render pipeline, material workflow, and setup requirements.", "datePublished": "2026-10-16", "dateModified": "2026-10-17", "author": {"@type": "Organization", "name": "CrowBite"}, "publisher": {"@type": "Organization", "name": "CrowBite"}, "mainEntityOfPage": "https://luci0n.github.io/crowpsx/guides/psx-shaders-unity-comparison/", "image": "https://luci0n.github.io/crowpsx/assets/street.webp"}]</script>
+<script defer src="/crowpsx/site.js?v=943fe0f135"></script>
+<meta content="/crowpsx" name="site-base">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+<div class="wrap">
+<a aria-label="CrowPSX home" class="brand" href="/crowpsx/"><span class="brand-word">Crow<span>PSX</span></span><small>BY CROWBITE</small></a>
+<nav aria-label="Main navigation" class="site-nav">
+<a href="/crowpsx/#features">The suite</a>
+<a href="/crowpsx/guides/">Field notes</a>
+<a aria-current="page" href="/crowpsx/guides/psx-shaders-unity-comparison/">Compare</a>
+<a href="/crowpsx/docs/">Docs</a>
+</nav>
+<a class="button ghost" href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Asset Store ↗</a>
+</div>
+</header>
+
+<main id="main">
+
+<div class="article-head wrap">
+<a class="back" href="/crowpsx/guides/">← FIELD NOTES</a>
+<p class="eyebrow accent" style="margin-top:24px">Buyer's guide · 6 min read</p>
+<h1 class="display">Which PSX shader belongs in your Unity project?</h1>
+<p class="lead">Compare CrowPSX, URP-PSX, Haunted PSX Render Pipeline, and PSX Retro by render pipeline, material workflow, and setup requirements.</p>
+<div class="byline"><span>By CrowBite, creator of CrowPSX</span><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-17">October 17, 2026</time></span></div>
+<aside class="callout" style="margin-top:36px">
+<svg aria-hidden="true" class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.5v.01"/></svg>
+<p><strong>Publisher disclosure.</strong> This guide is published by CrowBite, the creator of CrowPSX. It compares features and setup requirements from the linked documentation. We have not benchmarked these products against each other.</p>
+</aside>
+<nav aria-label="On this page" class="toc-inline">
+<a href="#short-answer">The short answer</a><a href="#compare">Compare approaches</a><a href="#fit">Which one fits?</a><a href="#cost">Cost &amp; compatibility</a><a href="#sources">Sources &amp; method</a>
+</nav>
+</div>
+
+<section class="section-sm wrap" id="short-answer">
+<p class="eyebrow"><b>01</b> / The short answer</p>
+<h2 class="display h-md" style="margin-bottom:12px">Start with your render pipeline.</h2>
+<p class="muted" style="margin:0 0 36px;max-width:620px">Start with the render pipeline your project uses, then compare the visual controls and material tools you need.</p>
+<div class="cells decide">
+<div class="cell"><span class="label">IF YOU'RE ON BUILT-IN OR URP AND WANT…</span><p>PSX geometry controls alongside terrain, foliage, PBR materials, and batch material tools</p><span class="pick ours">→ CrowPSX</span></div>
+<div class="cell"><span class="label">IF YOU WANT…</span><p>A free Shader Graph starting point you can study or adapt</p><span class="pick">→ URP-PSX</span></div>
+<div class="cell"><span class="label">IF YOU CAN…</span><p>Build your project around a dedicated render pipeline</p><span class="pick">→ Haunted PSX</span></div>
+<div class="cell"><span class="label">IF YOU'RE ON BUILT-IN AND WANT…</span><p>A packaged retro effect toolkit to evaluate</p><span class="pick">→ PSX Retro</span></div>
+</div>
+</section>
+
+<section class="section-sm wrap" id="compare">
+<p class="eyebrow"><b>02</b> / At a glance</p>
+<div class="section-head" style="margin-bottom:28px">
+<div><h2 class="display h-md">Four approaches.</h2><p class="muted" style="margin:12px 0 0;max-width:560px;font-size:16px">“Dedicated” means adopting that tool's own pipeline rather than adding materials to Built-in or URP.</p></div>
+<div aria-label="Filter by pipeline" class="filters" role="group">
+<button aria-pressed="true" data-filter="all" type="button">All approaches</button>
+<button aria-pressed="false" data-filter="urp" type="button">URP</button>
+<button aria-pressed="false" data-filter="builtin" type="button">Built-in</button>
+<button aria-pressed="false" data-filter="dedicated" type="button">Dedicated</button>
+</div>
+</div>
+<div class="table-box">
+<table>
+<caption>PSX rendering options, checked October 16, 2026. Versions are those listed in the linked sources; check each project for newer compatibility information.</caption>
+<thead><tr><th scope="col" style="width:22%">Tool</th><th scope="col" style="width:18%">Pipeline</th><th scope="col" style="width:28%">Version reference</th><th scope="col">Best suited to</th></tr></thead>
+<tbody>
+<tr class="ours" data-pipeline="urp builtin"><th scope="row"><a href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">CrowPSX ↗</a><small>By CrowBite · our suite</small></th><td><span class="tag">Built-in + URP</span></td><td>Unity 2022.3 LTS or newer</td><td>Retro materials plus terrain, Nature, PBR, and batch authoring</td></tr>
+<tr data-pipeline="urp"><th scope="row"><a href="https://github.com/Kodrin/URP-PSX">URP-PSX ↗</a><small>By Kodrin</small></th><td><span class="tag">URP / Shader Graph</span></td><td>README lists Unity 2019.3.7f1 / URP 7.1.8</td><td>Open-source shader graphs and renderer effects you can study or adapt</td></tr>
+<tr data-pipeline="dedicated"><th scope="row"><a href="https://github.com/pastasfuture/com.hauntedpsx.render-pipelines.psx/releases">Haunted PSX ↗</a><small>Haunted PSX Render Pipeline</small></th><td><span class="tag">Dedicated pipeline</span></td><td>Release 1.7.0 lists Unity 2019 LTS through 2022.2</td><td>A project whose rendering can be built around a dedicated pipeline</td></tr>
+<tr data-pipeline="builtin"><th scope="row"><a href="https://marketplace.unity.com/packages/vfx/shaders/psx-retro-261462">PSX Retro ↗</a><small>By AK STUDIO ART</small></th><td><span class="tag">Built-in</span></td><td>Store lists 2021.3.45f2, 2022.3.62f2, and 6000.0.60f1</td><td>A Built-in project evaluating a packaged retro effect toolkit</td></tr>
+</tbody>
+</table>
+</div>
+<p aria-live="polite" class="status" id="filter-status">Showing all 4 approaches.</p>
+</section>
+
+<section class="section-sm wrap" id="fit">
+<p class="eyebrow"><b>03</b> / Which one fits?</p>
+<h2 class="display h-md" style="margin-bottom:36px">Choose for the game<br>you're making.</h2>
+<div class="grid-2" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:20px">
+<article class="card fit ours">
+<div><p class="eyebrow">Built-in + URP · our suite</p><h3 class="h-card">CrowPSX: when the material workflow matters</h3></div>
+<div><h4>Good fit</h4><ul><li>Stay in Built-in or URP and manage a broader set of world materials</li><li>Default, Lite, and PBR surfaces; four-layer vertex painting; wind-driven Nature variants; TerrainLayer materials</li><li>Particles, depth-volume decals, and a procedural skybox</li><li>Material Manager presets; stereo-stable snapping and separate VR controls</li></ul></div>
+<div><h4>Watch for</h4><ul class="watch"><li>HDRP shaders are not included</li><li>URP decals and outlines need CrowPSX renderer features; distortion needs Opaque Texture</li><li>Keep the installed package at <code>Assets/CrowPSX</code></li><li>Add a camera effect solution for full-screen pixelation or CRT presentation</li></ul></div>
+<a class="text-link" href="/crowpsx/docs/render-pipelines/">Read compatibility and setup notes →</a>
+</article>
+<article class="card fit">
+<div><p class="eyebrow">URP / Shader Graph · by Kodrin</p><h3 class="h-card">URP-PSX: an open-source starting point</h3></div>
+<div><h4>Good fit</h4><ul><li>Shader Graph materials combined with URP renderer effects</li><li>README lists vertex snapping, color precision, texture pixelation, screen-space fog, dithering, and pixelation</li><li>MIT license</li></ul></div>
+<div><h4>Watch for</h4><ul class="watch"><li>The listed Unity and URP versions are older; test migration in a separate project</li><li>The README notes a PBR lighting issue</li></ul></div>
+<a class="text-link" href="https://github.com/Kodrin/URP-PSX">Read the original README ↗</a>
+</article>
+<article class="card fit">
+<div><p class="eyebrow">Dedicated pipeline</p><h3 class="h-card">Haunted PSX: when the pipeline is the foundation</h3></div>
+<div><h4>Good fit</h4><ul><li>You can choose your project's rendering foundation around it</li><li>Uses its own render pipeline asset; the installation guide walks through assigning it</li></ul></div>
+<div><h4>Watch for</h4><ul class="watch"><li>A larger rendering choice than changing a material shader</li><li>Release 1.7.0 documents support through Unity 2022.2; the cited notes do not establish Unity 6 support</li></ul></div>
+<a class="text-link" href="https://github.com/pastasfuture/com.hauntedpsx.render-pipelines.psx/wiki/installation-guide">Read the installation guide ↗</a>
+</article>
+<article class="card fit">
+<div><p class="eyebrow">Built-in · by AK STUDIO ART</p><h3 class="h-card">PSX Retro: another Built-in option</h3></div>
+<div><h4>Good fit</h4><ul><li>Publisher describes low-resolution rendering, polygon jitter, and retro image effects</li><li>Built-in projects evaluating a packaged effect toolkit</li></ul></div>
+<div><h4>Watch for</h4><ul class="watch"><li>Store table marks URP and HDRP incompatible for its listed Unity versions</li><li>Review its demo and current feature list against your desired presentation</li></ul></div>
+<a class="text-link" href="https://marketplace.unity.com/packages/vfx/shaders/psx-retro-261462">See the publisher's listing ↗</a>
+</article>
+</div>
+</section>
+
+<section class="section-sm wrap split" id="cost">
+<div>
+<p class="eyebrow"><b>04</b> / Cost &amp; compatibility</p>
+<h2 class="display h-md" style="margin-bottom:16px">The real cost of integration.</h2>
+<p class="muted" style="margin:0;font-size:16px">Prices checked October 16, 2026. Check each listing for current pricing and license terms. Budget time for setup and migration alongside the purchase price.</p>
+</div>
+<div>
+<div class="prices">
+<div><span>CrowPSX</span><strong>US$24.99</strong></div>
+<div><span>PSX Retro</span><strong>US$9.99</strong></div>
+<div><span>URP-PSX</span><strong>MIT</strong></div>
+<div><span>Haunted PSX</span><strong class="small">Check repo license</strong></div>
+</div>
+<div class="testbox">
+<p style="margin:0 0 4px;font-weight:600">Before adopting any tool, reproduce your look in a small representative scene</p>
+<p class="muted" style="margin:0 0 16px;font-size:15px">Compare performance in a scene that includes:</p>
+<ul class="chips"><li>Your target hardware</li><li>Your lighting setup</li><li>Transparency</li><li>Vegetation</li><li>Camera motion</li></ul>
+</div>
+</div>
+</section>
+
+<section class="section-sm wrap" id="sources">
+<div class="sources split">
+<div>
+<p class="eyebrow">Sources &amp; method</p>
+<p class="muted" style="margin:0;font-size:15px">Checked October 16, 2026. CrowPSX features and setup are covered in <a href="/crowpsx/docs/">our documentation</a>. The other tools are described using the primary sources linked here. This guide covers four approaches and does not include performance benchmarks.</p>
+</div>
+<ul>
+<li><a href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">CrowPSX / Asset Store listing ↗</a></li>
+<li><a href="https://github.com/Kodrin/URP-PSX">URP-PSX / repository and README ↗</a></li>
+<li><a href="https://github.com/pastasfuture/com.hauntedpsx.render-pipelines.psx/releases">Haunted PSX / release notes and installation guide ↗</a></li>
+<li><a href="https://marketplace.unity.com/packages/vfx/shaders/psx-retro-261462">PSX Retro / publisher listing ↗</a></li>
+</ul>
+</div>
+<a class="card next-card" href="/crowpsx/guides/ps1-look-unity/">
+<div><p class="eyebrow accent" style="margin:0">Next · put it into practice</p><div class="title">Build your first PS1-inspired material</div></div>
+<span style="font-weight:600">Read the practical guide →</span>
+</a>
+</section>
+
+</main>
+
+<footer class="site-footer wrap">
+<div class="top">
+<div><a class="brand" href="/crowpsx/"><span class="brand-word">Crow<span>PSX</span></span></a><p>Old-school character. Your creative control.</p></div>
+<nav aria-label="Footer">
+<a href="/crowpsx/guides/">Guides</a>
+<a href="/crowpsx/guides/psx-shaders-unity-comparison/">Shader comparison</a>
+<a href="/crowpsx/docs/">Documentation</a>
+<a href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Asset Store ↗</a>
+</nav>
+</div>
+<p class="fine">© 2026 CrowBite. CrowPSX shaders for Unity.<br>Unity and PlayStation are trademarks of their respective owners. No affiliation or endorsement is implied.</p>
+</footer>
+</body>
+</html>

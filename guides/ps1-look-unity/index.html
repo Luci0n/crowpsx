@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>How to create a PS1-inspired look in Unity with CrowPSX</title><meta content="Set up CrowPSX materials in Unity Built-in or URP, then tune vertex snapping, affine warping, lighting, posterization, foliage, and terrain." name="description"/><meta content="#0b0d11" name="theme-color"/><meta content="index,follow" name="robots"/><link href="https://luci0n.github.io/crowpsx/guides/ps1-look-unity/" rel="canonical"/><meta content="article" property="og:type"/><meta content="How to create a PS1-inspired look in Unity with CrowPSX" property="og:title"/><meta content="Set up CrowPSX materials in Unity Built-in or URP, then tune vertex snapping, affine warping, lighting, posterization, foliage, and terrain." property="og:description"/><meta content="https://luci0n.github.io/crowpsx/guides/ps1-look-unity/" property="og:url"/><meta content="https://luci0n.github.io/crowpsx/assets/street.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><link href="/crowpsx/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/crowpsx/v2.css?v=8bd97ad2b5" rel="stylesheet"/><script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "CrowPSX", "url": "https://luci0n.github.io/crowpsx", "publisher": {"@type": "Organization", "name": "CrowBite"}}, {"@context": "https://schema.org", "@type": "Article", "headline": "How to create a PS1-inspired look in Unity with CrowPSX", "description": "Set up CrowPSX materials in Unity Built-in or URP, then tune vertex snapping, affine warping, lighting, posterization, foliage, and terrain.", "datePublished": "2026-10-16", "dateModified": "2026-10-17", "author": {"@type": "Organization", "name": "CrowBite"}, "publisher": {"@type": "Organization", "name": "CrowBite"}, "mainEntityOfPage": "https://luci0n.github.io/crowpsx/guides/ps1-look-unity/", "image": "https://luci0n.github.io/crowpsx/assets/street.webp"}]</script><script defer="" src="/crowpsx/site.js?v=943fe0f135"></script><meta content="/crowpsx" name="site-base"/></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+<div class="wrap">
+<a aria-label="CrowPSX home" class="brand" href="/crowpsx/"><span class="brand-word">Crow<span>PSX</span></span><small>BY CROWBITE</small></a>
+<nav aria-label="Main navigation" class="site-nav">
+<a href="/crowpsx/#features">The suite</a>
+<a aria-current="page" href="/crowpsx/guides/">Field notes</a>
+<a href="/crowpsx/guides/psx-shaders-unity-comparison/">Compare</a>
+<a href="/crowpsx/docs/">Docs</a>
+</nav>
+<a class="button ghost" href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Asset Store <svg aria-hidden="true" class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+</div>
+</header>
+
+<main id="main">
+<div class="article-head wrap">
+<a class="back" href="/crowpsx/guides/">← FIELD NOTES</a>
+<p class="eyebrow accent" style="margin-top:24px">Practical guide · 5 min read</p>
+<h1 class="display">Build a PS1-inspired look.<br><span class="accent-text">Keep your art direction.</span></h1>
+<p class="lead">Set up CrowPSX materials in Unity Built-in or URP, then tune vertex snapping, affine warping, lighting, posterization, foliage, and terrain.</p>
+<div class="byline"><span>By CrowBite, creator of CrowPSX</span><span aria-hidden="true">·</span><span>Updated <time datetime="2026-10-17">October 17, 2026</time></span></div>
+</div>
+<div class="article-layout wrap">
+<aside><nav aria-label="The walkthrough"><p class="eyebrow" style="padding-left:12px">The walkthrough</p><a href="#first"><b>01</b>First material</a><a href="#geometry"><b>02</b>Geometry</a><a href="#lighting"><b>03</b>Lighting</a><a href="#world"><b>04</b>World building</a><a href="#check"><b>05</b>Check the result</a></nav></aside>
+<article class="prose">
+<aside class="callout"><svg aria-hidden="true" class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.5v.01"/></svg><p>A CrowPSX 1.1.0 walkthrough by CrowBite. Build a PS1-inspired look with control over geometry, lighting, and materials.</p></aside>
+<p>A convincing retro scene comes from the relationship between geometry, textures, lighting, and camera presentation. Start with one material and a simple scene. Add each imperfection deliberately so you can see what it contributes.</p><h2 id="first"><span class="accent-text">01</span> Get one material working.</h2><ol><li>Import CrowPSX and keep it at <code>Assets/CrowPSX</code>. Use Unity 2022.3 LTS or newer with Built-in or URP.</li><li>Run <code>Tools &gt; CrowPSX &gt; Validate Installation</code> and resolve the reported setup issues.</li><li>Create a material using <code>CrowPSX/Surface/Lite</code> for a reduced feature set or <code>CrowPSX/Surface/Default</code> for the fuller non-PBR workflow.</li><li>Assign a Base Texture and Base Color. Apply the material to a mesh with clearly visible triangles and move the camera around it.</li></ol><p>For a workflow with normal maps, metallic response, or reflections, choose <code>CrowPSX/Surface/PBR</code>. PBR is an artistic option; you do not need it simply to produce a retro appearance.</p><h2 id="geometry"><span class="accent-text">02</span> Tune the geometry before the color.</h2><p>Open <strong>Retro Geometry</strong>. Adjust <strong>Pixel Snap X/Y</strong> while moving the camera slowly. Look at the silhouette and nearby edges. Use the lowest strength that gives your scene the character you want.</p><p>Next, increase <strong>Affine Warp</strong> and watch a textured surface at an angle. This control reduces perspective-correct interpolation. Large triangles make the distortion more obvious, so mesh topology is part of the result.</p><p>If the near-camera motion becomes distracting, use <strong>Snap Fade Start/End</strong>. Judge the effect at the game's actual movement speed, rather than only in a still screenshot. In VR, use the separate snap and affine strength controls and test in the headset.</p><figure><img alt="CrowPSX demo street with angled surfaces, low-poly architecture, and textured lighting" decoding="async" loading="lazy" src="/crowpsx/assets/street.webp"/><figcaption>Vertex-snapped geometry, textured surfaces, and warm lighting in the CrowPSX demo.</figcaption></figure><h2 id="lighting"><span class="accent-text">03</span> Make light and color work together.</h2><p>In <strong>Lighting</strong>, start with <strong>Vertex</strong> for a coarser appearance or <strong>Pixel</strong> for smoother per-pixel light. Adjust <strong>Lighting Steps</strong> to introduce bands. Use <strong>Final Posterize</strong> to reduce the completed lit result's color steps.</p><p>Change one control at a time. A dark wall can lose important shapes when lighting bands and posterization are both aggressive. Check an unlit corner, a midtone surface, and a bright light before applying the settings broadly.</p><p>For a lower output resolution, full-screen dithering, or CRT effects, add a camera post-processing solution that suits your render pipeline.</p><h2 id="world"><span class="accent-text">04</span> Carry the look through the world.</h2><h3>Foliage</h3><p>Choose a <code>CrowPSX/Nature</code> variant and assign the albedo texture. Nature materials start in Cutout mode with Cull Off. In <strong>Nature Wind</strong>, pick a preset and choose an anchoring source that matches the mesh. Local Height suits plants with a ground-level pivot; authored weights can use Vertex Alpha, UV2 Y, or a Mask Texture.</p><h3>Terrain</h3><p>On the Terrain object, select a Custom material using <code>CrowPSX/Terrain/PBR</code>. The shader reads Unity TerrainLayers. Keep the bundled terrain helper shaders installed so Built-in add passes and distant basemaps remain available.</p><h3>Sky and scene accents</h3><p>Assign <code>CrowPSX/Skybox/Procedural</code> under Lighting &gt; Environment. Use its gradient, clouds, stars, and celestial controls to support the scene's palette. Add particles and depth-volume decals where they help the environment tell a story.</p><p>Under URP, depth-volume decals require the <strong>CrowPSX Depth Volume</strong> renderer feature. Optional mesh outlines need the <strong>CrowPSX Outline Feature</strong> or camera support component. Grab Distortion needs Opaque Texture enabled on the URP Asset.</p><h2 id="check"><span class="accent-text">05</span> Check the result in motion.</h2><ul><li>Move through near and distant geometry; inspect snapping and affine distortion.</li><li>Check opaque, cutout, and transparent materials in their intended lighting.</li><li>Verify URP renderer features on the renderer your camera actually uses.</li><li>Profile a build on your target hardware. Try Lite materials where you need fewer features, and compare the results in your scene.</li><li>Save a material preset, then review the Material Manager's target list before applying it across your project.</li></ul><p>Open <code>Assets/CrowPSX/Demo.unity</code> to explore the materials and scene setup, then try the same controls in a small scene from your game.</p>
+<div class="article-next"><p class="eyebrow accent">Keep building</p><h3>Need the setup details?</h3><a class="text-link" href="/crowpsx/docs/">Read compatibility and shader notes →</a></div>
+</article>
+</div>
+<section class="cta wrap">
+<div class="cta-box">
+<div class="scan"><img alt="" decoding="async" loading="lazy" src="/crowpsx/assets/sky.webp"></div>
+<div aria-hidden="true" class="shade"></div>
+<div class="cta-inner">
+<div><p class="eyebrow accent">Make something that stays with you</p><h2 class="display">Make it<br>your own.</h2></div>
+<div>
+<p>Build your retro look with materials, terrain, foliage, particles, and a sky that belongs to your world.</p>
+<div class="actions" style="margin-top:0">
+<a class="button" href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Get CrowPSX <svg aria-hidden="true" class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+<a class="text-link" href="/crowpsx/docs/">Read the setup guide →</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="site-footer wrap">
+<div class="top">
+<div><a class="brand" href="/crowpsx/"><span class="brand-word">Crow<span>PSX</span></span></a><p>Old-school character. Your creative control.</p></div>
+<nav aria-label="Footer">
+<a href="/crowpsx/guides/">Guides</a>
+<a href="/crowpsx/guides/psx-shaders-unity-comparison/">Shader comparison</a>
+<a href="/crowpsx/docs/">Documentation</a>
+<a href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Asset Store ↗</a>
+</nav>
+</div>
+<p class="fine">© 2026 CrowBite. CrowPSX shaders for Unity.<br>Unity and PlayStation are trademarks of their respective owners. No affiliation or endorsement is implied.</p>
+</footer>
+</body>
+</html>
