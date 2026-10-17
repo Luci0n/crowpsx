@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Getting started | CrowPSX Documentation</title><meta content="Create your first material and configure lighting, geometry, and rendering." name="description"/><meta content="#11120f" name="theme-color"/><meta content="index,follow" name="robots"/><link href="https://luci0n.github.io/crowpsx/docs/getting-started/" rel="canonical"/><meta content="website" property="og:type"/><meta content="Getting started | CrowPSX Documentation" property="og:title"/><meta content="Create your first material and configure lighting, geometry, and rendering." property="og:description"/><meta content="https://luci0n.github.io/crowpsx/docs/getting-started/" property="og:url"/><meta content="https://luci0n.github.io/crowpsx/assets/street.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><link href="/crowpsx/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/crowpsx/style.css" rel="stylesheet"/><script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "CrowPSX", "url": "https://luci0n.github.io/crowpsx", "publisher": {"@type": "Organization", "name": "CrowBite"}}]</script><link href="/crowpsx/docs.css" rel="stylesheet"/><script defer="" src="/crowpsx/docs.js"></script><meta content="/crowpsx" name="site-base"/><link href="/crowpsx/refresh.css" rel="stylesheet"/></head><body class="docs-body"><a class="skip" href="#main">Skip to content</a><main id="main"><header class="docs-header"><a aria-label="CrowPSX home" class="brand" href="/crowpsx/">Crow<span>PSX</span></a><a class="docs-wordmark" href="/crowpsx/docs/">Documentation</a><span class="docs-version">v1.1.0</span><div class="docs-search"><label class="sr-only" for="docs-query">Search documentation</label><span aria-hidden="true">⌕</span><input aria-controls="search-results" aria-expanded="false" autocomplete="off" id="docs-query" placeholder="Search documentation…" type="search"/><kbd>Ctrl K</kbd><div class="search-panel" hidden="" id="search-panel"><p aria-live="polite" id="search-count" role="status"></p><ul aria-label="Search results" id="search-results"></ul></div></div><a class="docs-store" href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Get CrowPSX ↗</a><button aria-controls="docs-sidebar" aria-expanded="false" aria-label="Browse documentation" class="nav-toggle" type="button">☰ <span>Browse docs</span></button></header><div class="docs-layout"><nav aria-label="Documentation" class="docs-sidebar" id="docs-sidebar"><div class="nav-group"><p>START HERE</p><a href="/crowpsx/docs/">Overview</a><a href="/crowpsx/docs/installation/">Installation</a><a aria-current="page" href="/crowpsx/docs/getting-started/">Getting started</a><a href="/crowpsx/docs/render-pipelines/">Render pipelines</a></div><div class="nav-group"><p>SHADER REFERENCE</p><a href="/crowpsx/docs/surface-shaders/">Surface shaders</a><a href="/crowpsx/docs/nature/">Nature &amp; wind</a><a href="/crowpsx/docs/terrain/">Terrain</a><a href="/crowpsx/docs/particles/">Particles</a><a href="/crowpsx/docs/decals/">Depth-volume decals</a><a href="/crowpsx/docs/skybox/">Procedural skybox</a></div><div class="nav-group"><p>MATERIAL WORKFLOWS</p><a href="/crowpsx/docs/surface-controls/">Lighting &amp; retro controls</a><a href="/crowpsx/docs/pbr-workflows/">PBR workflows</a><a href="/crowpsx/docs/vertex-painting/">Vertex painting</a><a href="/crowpsx/docs/material-manager/">Material Manager</a><a href="/crowpsx/docs/baking-transparency/">Baking &amp; transparency</a></div><div class="nav-group"><p>INTEGRATION</p><a href="/crowpsx/docs/vr-stereo/">VR &amp; stereo</a><a href="/crowpsx/docs/demo-scene/">Demo scene</a></div><div class="nav-group"><p>REFERENCE</p><a href="/crowpsx/docs/performance/">Performance</a><a href="/crowpsx/docs/troubleshooting/">Troubleshooting</a><a href="/crowpsx/docs/changelog/">Changelog</a></div><div class="sidebar-footer"><a href="/crowpsx/">← Product website</a><span>Built-in + URP</span></div></nav><div class="docs-page"><div class="doc-breadcrumb"><a href="/crowpsx/docs/">Docs</a><span>/</span><span>Getting started</span></div><article class="doc-article"><div class="doc-heading"><p class="eyebrow">START HERE</p><h1>Getting started</h1><p>Create your first material and configure lighting, geometry, and rendering.</p><span>PACKAGE VERSION 1.1.0</span></div><details class="mobile-toc"><summary>On this page</summary><a href="#1-import-and-validate">1. Import and validate</a><a href="#2-choose-a-shader">2. Choose a shader</a><a href="#3-set-up-a-terrain-material">3. Set up a Terrain material</a><a href="#4-configure-vr-rendering">4. Configure VR rendering</a><a href="#5-set-up-the-surface">5. Set up the surface</a><a href="#6-configure-lighting">6. Configure lighting</a><a href="#7-configure-retro-geometry">7. Configure retro geometry</a><a href="#8-optional-outlines">8. Optional outlines</a><a href="#9-choose-a-rendering-mode">9. Choose a rendering mode</a><a href="#10-set-up-a-nature-material">10. Set up a Nature material</a><a href="#11-use-presets">11. Use presets</a><a href="#12-batch-edit-materials">12. Batch-edit materials</a><a href="#13-configure-a-procedural-sky">13. Configure a procedural sky</a><a href="#14-set-up-depth-volume-decals">14. Set up depth-volume decals</a><a href="#recommended-first-checks">Recommended first checks</a></details><div class="doc-content"><p>This guide covers the shortest path from import to a working CrowPSX material.</p>
+<h2 id="1-import-and-validate">1. Import and validate<a aria-label="Link to 1. Import and validate" class="heading-anchor" href="#1-import-and-validate">#</a></h2>
+<p>Import the complete <code>Assets/CrowPSX</code> folder, leave it at that path, and wait for Unity to finish compiling. Run:</p>
+<pre tabindex="0"><button aria-label="Copy code example" class="copy-code" type="button">Copy</button><code class="language-text">Tools &gt; CrowPSX &gt; Validate Installation
+</code></pre>
+<p>The validator checks shader discovery, the shader property contract, XR tokens in the shared includes, editor assembly placement, required package contents, the property catalog used by CrowPSX tools, and (under the Universal Render Pipeline) whether the active Universal Renderer carries the CrowPSX Depth Volume feature. It never changes project settings or material assets.</p>
+<p>To inspect the complete package, open <code>Assets/CrowPSX/Demo.unity</code>. See <a href="/crowpsx/docs/demo-scene/">Demo Scene</a> for controls and input requirements.</p>
+<h2 id="2-choose-a-shader">2. Choose a shader<a aria-label="Link to 2. Choose a shader" class="heading-anchor" href="#2-choose-a-shader">#</a></h2>
+<p>Create a Unity material and select a shader from the <code>CrowPSX</code> menu.</p>
+<ul>
+<li><strong>Surface/Default</strong>: full stylized non-PBR feature set</li>
+<li><strong>Surface/Lite</strong>: reduced surface shader for simpler materials</li>
+<li><strong>Surface/PBR</strong>: separate or packed PBR maps, normal, metallic, ambient occlusion, height parallax, smoothness/roughness, specular, reflections, and detail maps</li>
+<li><strong>Surface/Vertex Painting/...</strong>: dedicated four-layer materials driven by mesh vertex colors</li>
+<li><strong>Nature/...</strong>: cutout-friendly Default, Lite, and PBR foliage shaders with wind deformation</li>
+<li><strong>Terrain/PBR</strong>: Terrain material using Unity TerrainLayers, with CrowPSX lighting, color, and pixel-snap controls</li>
+<li><strong>Particles</strong>: ParticleSystem-oriented VFX shaders</li>
+<li><strong>Decals/Depth Volume</strong>: projected box-volume decal</li>
+<li><strong>Skybox/Procedural</strong>: procedural environment shader</li>
+</ul>
+<h2 id="3-set-up-a-terrain-material">3. Set up a Terrain material<a aria-label="Link to 3. Set up a Terrain material" class="heading-anchor" href="#3-set-up-a-terrain-material">#</a></h2>
+<p>Select the Terrain object, open <strong>Terrain Settings</strong>, set <strong>Material</strong> to <strong>Custom</strong>, then assign a material using <code>CrowPSX/Terrain/PBR</code>.</p>
+<p>CrowPSX reads the Terrain's existing TerrainLayers, including their albedo, normal, metallic, smoothness, and holes data. In the Built-in Render Pipeline, Unity automatically uses the bundled supporting terrain passes for more than four layers and for the distant basemap; keep those hidden shaders in the original <code>CrowPSX/Shaders/Terrain</code> folder. Under the Universal Render Pipeline the same shader follows URP's own terrain contract and the hidden Built-in helpers are unused.</p>
+<h2 id="4-configure-vr-rendering">4. Configure VR rendering<a aria-label="Link to 4. Configure VR rendering" class="heading-anchor" href="#4-configure-vr-rendering">#</a></h2>
+<p>CrowPSX supports Multi-Pass, Single Pass Instanced, and Android Multiview in the Built-in Render Pipeline, and URP's Single Pass Instanced and Multiview modes.</p>
+<ul>
+<li>Use the <strong>Forward</strong> rendering path for Single Pass Instanced. Built-in deferred does not support that mode.</li>
+<li>Soft particles and Depth Volume decals require the camera depth texture.</li>
+<li>Grab Distortion uses true scene refraction in Multi-Pass and a stereo-safe heat-ripple fallback in Single Pass Instanced/Multiview.</li>
+<li>Use <strong>VR / Stereo Comfort</strong> to choose a profile or tune <strong>VR Snap Strength</strong> and <strong>VR Affine Strength</strong> independently. Stereo snapping shares one displacement between both eyes to preserve binocular disparity.</li>
+</ul>
+<h2 id="5-set-up-the-surface">5. Set up the surface<a aria-label="Link to 5. Set up the surface" class="heading-anchor" href="#5-set-up-the-surface">#</a></h2>
+<p>Regular surface shaders use <strong>Base Texture</strong> and <strong>Base Color</strong>.</p>
+<p>Painted variants use <strong>Painted Material Layers</strong> instead. Select Base, Red, Green, or Blue and assign the maps for that layer. Their regular <code>_MainTex</code> surface path is intentionally absent.</p>
+<p>For a PBR material, choose <strong>Separate Maps</strong> when individual maps need different textures or UV transforms, or <strong>Packed Map</strong> to read Metallic, Ambient Occlusion, Height, and Smoothness/Roughness from one texture. Enable <strong>Link PBR UVs</strong> to drive all core PBR transforms from the surface-color texture. See <a href="/crowpsx/docs/pbr-workflows/">PBR Workflows</a>.</p>
+<h2 id="6-configure-lighting">6. Configure lighting<a aria-label="Link to 6. Configure lighting" class="heading-anchor" href="#6-configure-lighting">#</a></h2>
+<p>Open <strong>Lighting</strong> and choose:</p>
+<ul>
+<li><strong>Pixel</strong> for smoother per-pixel realtime lighting</li>
+<li><strong>Vertex</strong> for a coarser retro or fixed-function appearance</li>
+</ul>
+<p>Use <strong>Lighting Steps</strong> for quantized bands. <strong>Final Posterize</strong> grades the completed lit result rather than only the source texture.</p>
+<h2 id="7-configure-retro-geometry">7. Configure retro geometry<a aria-label="Link to 7. Configure retro geometry" class="heading-anchor" href="#7-configure-retro-geometry">#</a></h2>
+<p>Open <strong>Retro Geometry</strong>:</p>
+<ul>
+<li>Pixel Snap X/Y controls screen-space snapping</li>
+<li>Affine Warp reduces perspective-correct texture interpolation</li>
+<li>Snap Fade Start/End reduces near-camera instability</li>
+<li>VR Snap Strength controls how much stereo-stable snapping remains in VR</li>
+<li>VR Affine Strength independently controls affine texture warping in VR</li>
+<li>Snap Shadow Caster applies compatible snapping in the shadow pass</li>
+</ul>
+<p>The effect is vertex-dependent. Large triangles produce larger visible steps and affine distortion.</p>
+<h2 id="8-optional-outlines">8. Optional outlines<a aria-label="Link to 8. Optional outlines" class="heading-anchor" href="#8-optional-outlines">#</a></h2>
+<p>On a Default, Lite, PBR, or Vertex Painting material, open <strong>Outline</strong> and enable it. Choose fixed screen pixels or world-space width, optionally fade it over a camera-distance range, mask it with a texture, and use <strong>Match Base Color</strong> to blend toward the sampled surface. The outline is an extra draw only while enabled; disabling it switches the shader pass off. Prefer Opaque or Cutout because transparent surfaces normally do not write enough depth to hide their own hull. Nature is excluded because its usual single-plane alpha cards require texture-silhouette dilation rather than a closed-mesh hull.</p>
+<p>If hard edges leave gaps in the hull, change <strong>Normal Source</strong> to <strong>Baked Smooth UV4</strong>. Click <strong>Bake Outline Normals</strong> in the material inspector to bake the renderer shown in <strong>Source Renderer</strong>, or use <strong>Tools &gt; CrowPSX &gt; Outline Normals</strong> to bake across selected scene objects. The generated copy is saved beside the source model, preserves the original mesh shading, and uses UV4 only for continuous outline extrusion. Use the matching Restore action to reassign the source mesh later. Enable <strong>Read/Write</strong> in the model importer if the baker reports an unreadable mesh.</p>
+<p><strong>Source Renderer</strong> defaults to the selected object's renderer, so it only needs an assignment when baking a renderer other than the one being inspected. The bake always works in place: the generated mesh goes onto that renderer and the material keeps drawing its own outline pass. There is no separate outline renderer and no rendering-mode control.</p>
+<p>Under URP, use the warning's <strong>Add CrowPSX Outline To Universal Renderer</strong> button once. URP requires that renderer feature to request the additional outline pass. Built-in rendering needs no setup.</p>
+<h2 id="9-choose-a-rendering-mode">9. Choose a rendering mode<a aria-label="Link to 9. Choose a rendering mode" class="heading-anchor" href="#9-choose-a-rendering-mode">#</a></h2>
+<p>Open <strong>Rendering</strong> and choose:</p>
+<ul>
+<li><strong>Opaque</strong> for solid geometry</li>
+<li><strong>Cutout</strong> for hard alpha silhouettes such as fences, leaves, cards, and grates</li>
+<li><strong>Transparent</strong> for blended opacity</li>
+</ul>
+<p>CrowPSX synchronizes blend state, render tags, queue behavior, and recommended depth settings when the rendering mode changes.</p>
+<h2 id="10-set-up-a-nature-material">10. Set up a Nature material<a aria-label="Link to 10. Set up a Nature material" class="heading-anchor" href="#10-set-up-a-nature-material">#</a></h2>
+<p>Choose <code>CrowPSX/Nature/Lite</code>, <code>Default</code>, or <code>PBR</code> for leaves, grass, vines, and similar foliage.</p>
+<ol>
+<li>Assign the Albedo texture and keep <strong>Use Main Texture Alpha</strong> enabled.</li>
+<li>Nature shaders begin in <strong>Cutout</strong> mode with <strong>Cull Off</strong>.</li>
+<li>Open <strong>Nature Wind</strong> and apply the closest preset: Gentle Leaves, Grass Breeze, Shrub, Tree Canopy, or Strong Wind.</li>
+<li>Choose an <strong>Anchoring Source</strong>:
+<ul>
+<li><strong>Local Height</strong> for grass and plants with a ground-level pivot</li>
+<li><strong>Vertex Alpha</strong> for authored per-vertex anchoring</li>
+<li><strong>UV2 Y</strong> when the mesh stores a wind weight in its second UV channel</li>
+<li><strong>Mask Texture</strong> for UV-authored control</li>
+</ul>
+</li>
+<li>Adjust <strong>Maximum Bend</strong> first. Use low Sway/Gust frequencies for natural movement, then add Leaf Flutter sparingly.</li>
+<li>Verify realtime shadows. Baked shadows use the mesh rest pose.</li>
+</ol>
+<h2 id="11-use-presets">11. Use presets<a aria-label="Link to 11. Use presets" class="heading-anchor" href="#11-use-presets">#</a></h2>
+<p><strong>General Presets</strong> provides console-era and practical starting points. Custom presets are shared by the material inspector and Material Manager and saved to:</p>
+<pre tabindex="0"><button aria-label="Copy code example" class="copy-code" type="button">Copy</button><code class="language-text">ProjectSettings/CrowPSX/CustomMaterialPresets.json
+</code></pre>
+<h2 id="12-batch-edit-materials">12. Batch-edit materials<a aria-label="Link to 12. Batch-edit materials" class="heading-anchor" href="#12-batch-edit-materials">#</a></h2>
+<p>Open:</p>
+<pre tabindex="0"><button aria-label="Copy code example" class="copy-code" type="button">Copy</button><code class="language-text">Tools &gt; CrowPSX &gt; Material Manager
+</code></pre>
+<p>Use it to copy compatible settings, reset groups, convert surface variants, apply presets, batch-change rendering and lighting, or apply a VR comfort profile to many materials. Review the target list before applying project-wide operations.</p>
+<h2 id="13-configure-a-procedural-sky">13. Configure a procedural sky<a aria-label="Link to 13. Configure a procedural sky" class="heading-anchor" href="#13-configure-a-procedural-sky">#</a></h2>
+<p>Assign a material using <code>CrowPSX/Skybox/Procedural</code> in <strong>Lighting &gt; Environment &gt; Skybox Material</strong>.</p>
+<ul>
+<li>Use the sky gradient and final grading controls for the environment base.</li>
+<li><strong>Environment Lighting</strong> keeps <strong>Lighting &gt; Environment Lighting &gt; Source</strong> set to Skybox. <strong>Filter Skybox Ambient Color</strong> optionally reduces or tints the generated ambient probe without recoloring the visible sky or its reflections, <strong>Auto Apply To Active Scene</strong> pushes changes as you edit, and <strong>Apply To Scene</strong> applies them once on demand. The filter affects the realtime fallback probe; rebake lightmaps and baked Light Probes to pick up a revised environment color.</li>
+<li>Enable the Sun, Moon, or extra celestial bodies as needed. Celestial masks can use Texture Alpha, Brightness, or Alpha × Brightness.</li>
+<li>Enable Moon Phase for an analytic lunar cycle with phase presets, terminator controls, and earthshine.</li>
+<li>Stars follow spherical latitude rings. Amount controls population; Size and Brightness remain independent.</li>
+<li>Cloud self-lighting follows the strongest enabled Sun or Moon above the horizon.</li>
+<li>HDR exposure and celestial highlights remain unclamped for bloom, reflection probes, and environment capture; tone mapping belongs to the camera/output pipeline.</li>
+</ul>
+<h2 id="14-set-up-depth-volume-decals">14. Set up depth-volume decals<a aria-label="Link to 14. Set up depth-volume decals" class="heading-anchor" href="#14-set-up-depth-volume-decals">#</a></h2>
+<p>Depth-volume decals rebuild the receiving surface from the camera depth texture, so the rendering camera has to produce one, and the decal volume has to intersect opaque geometry.</p>
+<p>Under the Universal Render Pipeline they also need the <strong>CrowPSX Depth Volume</strong> renderer feature on the active Universal Renderer; without it URP hands the decal last frame's depth or a vertex-snapped surface and the decal drifts or flickers as the camera moves. Select the decal material and use the inspector's <strong>Add To Renderer</strong> action, or add it manually with <strong>Add Renderer Feature &gt; CrowPSX Depth Volume</strong>.</p>
+<p>Most surfaces require no stencil setup. To prevent decals on a particular material:</p>
+<ol>
+<li>Set the surface material's <strong>Optional Stencil / Decal Masking</strong> preset to <strong>Block Decals</strong>.</li>
+<li>Set the depth-volume decal material to <strong>Respect Blockers</strong>.</li>
+<li>Use <strong>Receiver</strong> and <strong>Test Receivers</strong> only when an explicit allow-list is required.</li>
+</ol>
+<p>Blocker and receiver flags use separate stencil bits and can coexist on the same material.</p>
+<h2 id="recommended-first-checks">Recommended first checks<a aria-label="Link to Recommended first checks" class="heading-anchor" href="#recommended-first-checks">#</a></h2>
+<ol>
+<li>Verify the material in Scene and Game views.</li>
+<li>Test the intended realtime-lighting mode.</li>
+<li>Confirm rendering mode, queue, and Z Write behavior.</li>
+<li>Test one baked-lighting setup if the project uses lightmaps.</li>
+<li>Import PBR normal textures as <strong>Normal Map</strong>.</li>
+<li>Import manually authored packed PBR maps with sRGB disabled.</li>
+<li>Start Parallax Height near zero and increase it gradually while checking grazing angles.</li>
+<li>Confirm painted meshes contain vertex colors and enough vertices for the desired brush resolution.</li>
+<li>Back up the project before performing a project-wide material operation.</li>
+</ol>
+</div></article><nav aria-label="Previous and next documentation pages" class="doc-pager"><a href="/crowpsx/docs/installation/"><small>Previous</small><span>Installation </span></a><a href="/crowpsx/docs/render-pipelines/"><small>Next</small><span>Render pipelines →</span></a></nav><div class="doc-footnote">CrowPSX 1.1.0 · CrowBite<br/>Documentation from the included package manuals.</div></div><aside aria-label="On this page" class="docs-toc"><p>ON THIS PAGE</p><a href="#1-import-and-validate">1. Import and validate</a><a href="#2-choose-a-shader">2. Choose a shader</a><a href="#3-set-up-a-terrain-material">3. Set up a Terrain material</a><a href="#4-configure-vr-rendering">4. Configure VR rendering</a><a href="#5-set-up-the-surface">5. Set up the surface</a><a href="#6-configure-lighting">6. Configure lighting</a><a href="#7-configure-retro-geometry">7. Configure retro geometry</a><a href="#8-optional-outlines">8. Optional outlines</a><a href="#9-choose-a-rendering-mode">9. Choose a rendering mode</a><a href="#10-set-up-a-nature-material">10. Set up a Nature material</a><a href="#11-use-presets">11. Use presets</a><a href="#12-batch-edit-materials">12. Batch-edit materials</a><a href="#13-configure-a-procedural-sky">13. Configure a procedural sky</a><a href="#14-set-up-depth-volume-decals">14. Set up depth-volume decals</a><a href="#recommended-first-checks">Recommended first checks</a><div class="toc-help"><p>Something not working?</p><a href="/crowpsx/docs/troubleshooting/">Troubleshooting →</a></div></aside></div></main><dialog id="lightbox"><button aria-label="Close image" class="close">×</button><img alt=""/><p></p></dialog></body></html>

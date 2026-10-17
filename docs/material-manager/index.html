@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Material Manager | CrowPSX Documentation</title><meta content="Batch targets, presets, conversion, rendering, checks, and themes." name="description"/><meta content="#11120f" name="theme-color"/><meta content="index,follow" name="robots"/><link href="https://luci0n.github.io/crowpsx/docs/material-manager/" rel="canonical"/><meta content="website" property="og:type"/><meta content="Material Manager | CrowPSX Documentation" property="og:title"/><meta content="Batch targets, presets, conversion, rendering, checks, and themes." property="og:description"/><meta content="https://luci0n.github.io/crowpsx/docs/material-manager/" property="og:url"/><meta content="https://luci0n.github.io/crowpsx/assets/street.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><link href="/crowpsx/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/crowpsx/style.css" rel="stylesheet"/><script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "CrowPSX", "url": "https://luci0n.github.io/crowpsx", "publisher": {"@type": "Organization", "name": "CrowBite"}}]</script><link href="/crowpsx/docs.css" rel="stylesheet"/><script defer="" src="/crowpsx/docs.js"></script><meta content="/crowpsx" name="site-base"/><link href="/crowpsx/refresh.css" rel="stylesheet"/></head><body class="docs-body"><a class="skip" href="#main">Skip to content</a><main id="main"><header class="docs-header"><a aria-label="CrowPSX home" class="brand" href="/crowpsx/">Crow<span>PSX</span></a><a class="docs-wordmark" href="/crowpsx/docs/">Documentation</a><span class="docs-version">v1.1.0</span><div class="docs-search"><label class="sr-only" for="docs-query">Search documentation</label><span aria-hidden="true">⌕</span><input aria-controls="search-results" aria-expanded="false" autocomplete="off" id="docs-query" placeholder="Search documentation…" type="search"/><kbd>Ctrl K</kbd><div class="search-panel" hidden="" id="search-panel"><p aria-live="polite" id="search-count" role="status"></p><ul aria-label="Search results" id="search-results"></ul></div></div><a class="docs-store" href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Get CrowPSX ↗</a><button aria-controls="docs-sidebar" aria-expanded="false" aria-label="Browse documentation" class="nav-toggle" type="button">☰ <span>Browse docs</span></button></header><div class="docs-layout"><nav aria-label="Documentation" class="docs-sidebar" id="docs-sidebar"><div class="nav-group"><p>START HERE</p><a href="/crowpsx/docs/">Overview</a><a href="/crowpsx/docs/installation/">Installation</a><a href="/crowpsx/docs/getting-started/">Getting started</a><a href="/crowpsx/docs/render-pipelines/">Render pipelines</a></div><div class="nav-group"><p>SHADER REFERENCE</p><a href="/crowpsx/docs/surface-shaders/">Surface shaders</a><a href="/crowpsx/docs/nature/">Nature &amp; wind</a><a href="/crowpsx/docs/terrain/">Terrain</a><a href="/crowpsx/docs/particles/">Particles</a><a href="/crowpsx/docs/decals/">Depth-volume decals</a><a href="/crowpsx/docs/skybox/">Procedural skybox</a></div><div class="nav-group"><p>MATERIAL WORKFLOWS</p><a href="/crowpsx/docs/surface-controls/">Lighting &amp; retro controls</a><a href="/crowpsx/docs/pbr-workflows/">PBR workflows</a><a href="/crowpsx/docs/vertex-painting/">Vertex painting</a><a aria-current="page" href="/crowpsx/docs/material-manager/">Material Manager</a><a href="/crowpsx/docs/baking-transparency/">Baking &amp; transparency</a></div><div class="nav-group"><p>INTEGRATION</p><a href="/crowpsx/docs/vr-stereo/">VR &amp; stereo</a><a href="/crowpsx/docs/demo-scene/">Demo scene</a></div><div class="nav-group"><p>REFERENCE</p><a href="/crowpsx/docs/performance/">Performance</a><a href="/crowpsx/docs/troubleshooting/">Troubleshooting</a><a href="/crowpsx/docs/changelog/">Changelog</a></div><div class="sidebar-footer"><a href="/crowpsx/">← Product website</a><span>Built-in + URP</span></div></nav><div class="docs-page"><div class="doc-breadcrumb"><a href="/crowpsx/docs/">Docs</a><span>/</span><span>Material Manager</span></div><article class="doc-article"><div class="doc-heading"><p class="eyebrow">MATERIAL WORKFLOWS</p><h1>Material Manager</h1><p>Batch targets, presets, conversion, rendering, checks, and themes.</p><span>PACKAGE VERSION 1.1.0</span></div><details class="mobile-toc"><summary>On this page</summary><a href="#target-sources">Target sources</a><a href="#copy-from-source">Copy from source</a><a href="#reset-defaults">Reset defaults</a><a href="#convert-variant">Convert variant</a><a href="#apply-preset">Apply preset</a><a href="#rendering-and-lighting">Rendering and lighting</a><a href="#vr-profile">VR profile</a><a href="#target-list-performance">Target-list performance</a><a href="#safe-workflow">Safe workflow</a></details><div class="doc-content"><p>CrowPSX exposes the Material Manager from one location:</p>
+<pre tabindex="0"><button aria-label="Copy code example" class="copy-code" type="button">Copy</button><code class="language-text">Tools &gt; CrowPSX &gt; Material Manager
+</code></pre>
+<p>The window contains a <strong>Batch</strong> workspace for material operations and a <strong>Theme</strong> workspace for the CrowPSX editor theme.</p>
+<h2 id="target-sources">Target sources<a aria-label="Link to Target sources" class="heading-anchor" href="#target-sources">#</a></h2>
+<p>The Batch workspace can collect materials from:</p>
+<ul>
+<li>Selection</li>
+<li>Scene Surfaces</li>
+<li>Scene All</li>
+<li>Scene Particles</li>
+<li>Scene Decals</li>
+<li>Scene CrowPSX All</li>
+<li>Project Surfaces</li>
+<li>Project All</li>
+<li>Project Particles</li>
+<li>Project Decals</li>
+<li>Project CrowPSX All</li>
+</ul>
+<p>Selection can optionally include child renderers. The resulting target list can be searched, filtered, sorted, added to, replaced, or reduced manually.</p>
+<h2 id="copy-from-source">Copy from source<a aria-label="Link to Copy from source" class="heading-anchor" href="#copy-from-source">#</a></h2>
+<p>Copies compatible settings from one source material to the target list. Guided scopes include Recommended, Appearance, Appearance and Textures, Everything, and Custom. The Custom scope can select schema groups and value types. Unsupported destination properties are skipped.</p>
+<h2 id="reset-defaults">Reset defaults<a aria-label="Link to Reset defaults" class="heading-anchor" href="#reset-defaults">#</a></h2>
+<p>Resets selected groups to the actual defaults of each destination shader variant. Texture slots are preserved unless texture reset is explicitly included. Use Full Reset carefully.</p>
+<h2 id="convert-variant">Convert variant<a aria-label="Link to Convert variant" class="heading-anchor" href="#convert-variant">#</a></h2>
+<p>Converts compatible surfaces among:</p>
+<ul>
+<li>Default</li>
+<li>Lite</li>
+<li>PBR</li>
+<li>Vertex Painting · Default</li>
+<li>Vertex Painting · Lite</li>
+<li>Vertex Painting · PBR</li>
+</ul>
+<p>Particles, decals, skyboxes, and special CrowPSX shaders are protected from surface conversion. Compatible values are preserved when requested. Conversion between regular and painted variants preserves Base-layer data where possible, but cannot invent meaningful Red/Green/Blue layers.</p>
+<h2 id="apply-preset">Apply preset<a aria-label="Link to Apply preset" class="heading-anchor" href="#apply-preset">#</a></h2>
+<p>Applies a built-in or custom preset using a selected scope. Custom presets are shared with the material inspector and stored in:</p>
+<pre tabindex="0"><button aria-label="Copy code example" class="copy-code" type="button">Copy</button><code class="language-text">ProjectSettings/CrowPSX/CustomMaterialPresets.json
+</code></pre>
+<h2 id="rendering-and-lighting">Rendering and lighting<a aria-label="Link to Rendering and lighting" class="heading-anchor" href="#rendering-and-lighting">#</a></h2>
+<p>Batch-change Opaque/Cutout/Transparent rendering, Pixel/Vertex lighting, or both. CrowPSX then validates render tags, blend state, queue, keywords, and recommended depth behavior.</p>
+<h2 id="vr-profile">VR profile<a aria-label="Link to VR profile" class="heading-anchor" href="#vr-profile">#</a></h2>
+<p>Applies a consistent VR comfort profile across compatible target materials. <strong>Off</strong>, <strong>Comfort</strong>, <strong>Balanced</strong>, and <strong>Full</strong> provide immediate starting points; <strong>Custom</strong> exposes separate snap and affine strengths. Terrain materials receive the snap setting and ignore affine strength because the Terrain shader does not use affine texture warping.</p>
+<p>VR profiles only scale the existing retro effects during stereo rendering. They do not change the material's desktop Pixel Snap or Affine Warp values. Stereo snapping uses a shared displacement for both eyes in Multi-Pass, Single Pass Instanced, and Multiview.</p>
+<h2 id="target-list-performance">Target-list performance<a aria-label="Link to Target-list performance" class="heading-anchor" href="#target-list-performance">#</a></h2>
+<p>Scene usage is cached and invalidated after hierarchy, project, selection, or Undo changes. Large target lists are virtualized. Project-wide collection still scans project Material assets and can take time in large projects.</p>
+<h2 id="safe-workflow">Safe workflow<a aria-label="Link to Safe workflow" class="heading-anchor" href="#safe-workflow">#</a></h2>
+<ol>
+<li>Commit or back up the project.</li>
+<li>Choose the narrowest target source.</li>
+<li>Review and filter the target list.</li>
+<li>Start with a conservative scope.</li>
+<li>Apply the operation.</li>
+<li>Review the report and inspect representative materials.</li>
+<li>Use Unity Undo immediately when the result is not intended.</li>
+</ol>
+<p>Test project-wide conversions on a copy of the project first.</p>
+</div></article><nav aria-label="Previous and next documentation pages" class="doc-pager"><a href="/crowpsx/docs/vertex-painting/"><small>Previous</small><span>Vertex painting </span></a><a href="/crowpsx/docs/baking-transparency/"><small>Next</small><span>Baking &amp; transparency →</span></a></nav><div class="doc-footnote">CrowPSX 1.1.0 · CrowBite<br/>Documentation from the included package manuals.</div></div><aside aria-label="On this page" class="docs-toc"><p>ON THIS PAGE</p><a href="#target-sources">Target sources</a><a href="#copy-from-source">Copy from source</a><a href="#reset-defaults">Reset defaults</a><a href="#convert-variant">Convert variant</a><a href="#apply-preset">Apply preset</a><a href="#rendering-and-lighting">Rendering and lighting</a><a href="#vr-profile">VR profile</a><a href="#target-list-performance">Target-list performance</a><a href="#safe-workflow">Safe workflow</a><div class="toc-help"><p>Something not working?</p><a href="/crowpsx/docs/troubleshooting/">Troubleshooting →</a></div></aside></div></main><dialog id="lightbox"><button aria-label="Close image" class="close">×</button><img alt=""/><p></p></dialog></body></html>

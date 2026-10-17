@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Changelog | CrowPSX Documentation</title><meta content="Changes in CrowPSX 1.1.0 and the initial release." name="description"/><meta content="#11120f" name="theme-color"/><meta content="index,follow" name="robots"/><link href="https://luci0n.github.io/crowpsx/docs/changelog/" rel="canonical"/><meta content="website" property="og:type"/><meta content="Changelog | CrowPSX Documentation" property="og:title"/><meta content="Changes in CrowPSX 1.1.0 and the initial release." property="og:description"/><meta content="https://luci0n.github.io/crowpsx/docs/changelog/" property="og:url"/><meta content="https://luci0n.github.io/crowpsx/assets/street.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><link href="/crowpsx/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/crowpsx/style.css" rel="stylesheet"/><script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "CrowPSX", "url": "https://luci0n.github.io/crowpsx", "publisher": {"@type": "Organization", "name": "CrowBite"}}]</script><link href="/crowpsx/docs.css" rel="stylesheet"/><script defer="" src="/crowpsx/docs.js"></script><meta content="/crowpsx" name="site-base"/><link href="/crowpsx/refresh.css" rel="stylesheet"/></head><body class="docs-body"><a class="skip" href="#main">Skip to content</a><main id="main"><header class="docs-header"><a aria-label="CrowPSX home" class="brand" href="/crowpsx/">Crow<span>PSX</span></a><a class="docs-wordmark" href="/crowpsx/docs/">Documentation</a><span class="docs-version">v1.1.0</span><div class="docs-search"><label class="sr-only" for="docs-query">Search documentation</label><span aria-hidden="true">⌕</span><input aria-controls="search-results" aria-expanded="false" autocomplete="off" id="docs-query" placeholder="Search documentation…" type="search"/><kbd>Ctrl K</kbd><div class="search-panel" hidden="" id="search-panel"><p aria-live="polite" id="search-count" role="status"></p><ul aria-label="Search results" id="search-results"></ul></div></div><a class="docs-store" href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Get CrowPSX ↗</a><button aria-controls="docs-sidebar" aria-expanded="false" aria-label="Browse documentation" class="nav-toggle" type="button">☰ <span>Browse docs</span></button></header><div class="docs-layout"><nav aria-label="Documentation" class="docs-sidebar" id="docs-sidebar"><div class="nav-group"><p>START HERE</p><a href="/crowpsx/docs/">Overview</a><a href="/crowpsx/docs/installation/">Installation</a><a href="/crowpsx/docs/getting-started/">Getting started</a><a href="/crowpsx/docs/render-pipelines/">Render pipelines</a></div><div class="nav-group"><p>SHADER REFERENCE</p><a href="/crowpsx/docs/surface-shaders/">Surface shaders</a><a href="/crowpsx/docs/nature/">Nature &amp; wind</a><a href="/crowpsx/docs/terrain/">Terrain</a><a href="/crowpsx/docs/particles/">Particles</a><a href="/crowpsx/docs/decals/">Depth-volume decals</a><a href="/crowpsx/docs/skybox/">Procedural skybox</a></div><div class="nav-group"><p>MATERIAL WORKFLOWS</p><a href="/crowpsx/docs/surface-controls/">Lighting &amp; retro controls</a><a href="/crowpsx/docs/pbr-workflows/">PBR workflows</a><a href="/crowpsx/docs/vertex-painting/">Vertex painting</a><a href="/crowpsx/docs/material-manager/">Material Manager</a><a href="/crowpsx/docs/baking-transparency/">Baking &amp; transparency</a></div><div class="nav-group"><p>INTEGRATION</p><a href="/crowpsx/docs/vr-stereo/">VR &amp; stereo</a><a href="/crowpsx/docs/demo-scene/">Demo scene</a></div><div class="nav-group"><p>REFERENCE</p><a href="/crowpsx/docs/performance/">Performance</a><a href="/crowpsx/docs/troubleshooting/">Troubleshooting</a><a aria-current="page" href="/crowpsx/docs/changelog/">Changelog</a></div><div class="sidebar-footer"><a href="/crowpsx/">← Product website</a><span>Built-in + URP</span></div></nav><div class="docs-page"><div class="doc-breadcrumb"><a href="/crowpsx/docs/">Docs</a><span>/</span><span>Changelog</span></div><article class="doc-article"><div class="doc-heading"><p class="eyebrow">REFERENCE</p><h1>Changelog</h1><p>Changes in CrowPSX 1.1.0 and the initial release.</p><span>PACKAGE VERSION 1.1.0</span></div><details class="mobile-toc"><summary>On this page</summary><a href="#1-1-0-unity-6-compatibility">1.1.0: Unity 6 Compatibility</a><a href="#1-0-0-initial-public-release">1.0.0: Initial Public Release</a><a href="#before-you-start">Before you start</a></details><div class="doc-content"><h2 id="1-1-0-unity-6-compatibility">1.1.0: Unity 6 Compatibility<a aria-label="Link to 1.1.0: Unity 6 Compatibility" class="heading-anchor" href="#1-1-0-unity-6-compatibility">#</a></h2>
+<p>Recent Unity 6 releases changed several URP and editor APIs. This update keeps CrowPSX working on every version from Unity 2022.3 LTS to Unity 6.6. Existing materials need no changes.</p>
+<h3 id="compatibility">Compatibility<a aria-label="Link to Compatibility" class="heading-anchor" href="#compatibility">#</a></h3>
+<ul>
+<li><strong>URP Forward+ on Unity 6.1 and newer.</strong> Point and spot lights render under Forward+, the default rendering path in new Unity 6 projects. These versions renamed the Forward+ shader keyword (<code>_FORWARD_PLUS</code> to <code>_CLUSTER_LIGHT_LOOP</code>); CrowPSX supports both, and builds only include the one your URP version uses.</li>
+<li><strong>URP Deferred+ (Unity 6.6).</strong> Supported as a rendering path, including Vertex-mode lighting.</li>
+<li><strong>Terrain on Unity 6.6.</strong> URP terrain materials render correctly after URP's terrain shader changes.</li>
+<li><strong>Clean import on Unity 6.6.</strong> No "Script Updating Consent" dialog and no deprecation warnings in the Console.</li>
+<li><strong>Input System projects.</strong> The demo scene runs in projects set to the Input System only, the default for new Unity 6 projects, with no Player Settings changes.</li>
+</ul>
+<h3 id="changed">Changed<a aria-label="Link to Changed" class="heading-anchor" href="#changed">#</a></h3>
+<ul>
+<li><strong>Vertex Hybrid under URP</strong> now matches Built-in: each light's shading, specular included, is calculated per vertex, while its falloff (and, on URP Forward, its shadow) is applied per pixel. The four most important point and spot lights get this treatment; any others are lit fully per vertex.</li>
+<li><strong>Documentation.</strong> The Shader Reference now explains the three lighting modes, light limits, and which lights cast shadows in each pipeline. The demo scene documentation reflects the new input support.</li>
+</ul>
+<h2 id="1-0-0-initial-public-release">1.0.0: Initial Public Release<a aria-label="Link to 1.0.0: Initial Public Release" class="heading-anchor" href="#1-0-0-initial-public-release">#</a></h2>
+<p>The first public release of CrowPSX for Unity's Built-in Render Pipeline and Universal Render Pipeline.</p>
+<h3 id="render-pipelines">Render pipelines<a aria-label="Link to Render pipelines" class="heading-anchor" href="#render-pipelines">#</a></h3>
+<ul>
+<li>Every lit shader carries both a Universal and a Built-in SubShader in the same shader asset, so materials survive a pipeline switch without being copied, reassigned, or upgraded.</li>
+<li>Automatic URP detection through a generated shader define, with <code>Tools &gt; CrowPSX &gt; Regenerate Pipeline Defines</code> as a manual fallback.</li>
+<li>Build-time stripping of the forward passes belonging to the pipeline a build is not using, disabled by the <code>CROWPSX_DISABLE_VARIANT_STRIPPING</code> scripting define.</li>
+<li>CrowPSX Depth Volume renderer feature for URP, with detection and one-click installation from the material inspector and the installation validator.</li>
+<li>CrowPSX Outline renderer feature for URP, with detection and one-click installation from the material inspector, since URP's object draw does not execute the additional outline pass on its own.</li>
+<li>CrowPSX Outline Support component as the per-scene alternative to that feature, requesting the same pass per camera so a shipped scene draws outlines without the project being set up. Built-in needs neither.</li>
+</ul>
+<h3 id="shader-suite">Shader suite<a aria-label="Link to Shader suite" class="heading-anchor" href="#shader-suite">#</a></h3>
+<ul>
+<li>Surface Default, Lite, and PBR shaders.</li>
+<li>Four-layer Vertex Painting Default, Lite, and PBR shaders using Base, Red, Green, and Blue vertex-color layers.</li>
+<li>Nature Default, Lite, and PBR shaders with animated foliage deformation.</li>
+<li>Terrain PBR shader with Built-in additional-pass, basemap, and basemap-generation support, and URP terrain-contract support.</li>
+<li>Standard and Grab Distortion particle shaders.</li>
+<li>Depth Volume decal shader.</li>
+<li>HDR Procedural Skybox shader.</li>
+</ul>
+<h3 id="surface-rendering-and-retro-controls">Surface rendering and retro controls<a aria-label="Link to Surface rendering and retro controls" class="heading-anchor" href="#surface-rendering-and-retro-controls">#</a></h3>
+<ul>
+<li>Pixel or vertex realtime lighting with direct, indirect, ambient, minimum-light, and stepped-lighting controls.</li>
+<li>Final-color grading and posterization.</li>
+<li>Screen-space vertex snapping, affine texture warping, and configurable pixel-snap templates.</li>
+<li>Opaque, Cutout, and Transparent rendering with alpha maps, bake-transparency maps, clipping, dithering, depth, culling, render queue, and GPU instancing controls.</li>
+<li>Stereo-stable geometry snapping for Multi-Pass, Single Pass Instanced, and Android Multiview VR.</li>
+<li>Visible VR / Stereo Comfort controls with Off, Comfort, Balanced, and Full profiles plus independent VR Snap and VR Affine strengths.</li>
+<li>Optional inverted-hull outlines on all six mesh-surface shaders, with screen-fixed or world-space width, distance fade, texture masking, and sampled base-color matching. Disabled materials submit no outline draw.</li>
+</ul>
+<h3 id="pbr-materials">PBR materials<a aria-label="Link to PBR materials" class="heading-anchor" href="#pbr-materials">#</a></h3>
+<ul>
+<li>Separate Maps and Packed Map workflows for Surface PBR and Nature PBR, with an independent workflow for every painted PBR layer.</li>
+<li>Smoothness or Roughness surface-response workflows, including independent selection per painted layer.</li>
+<li>Normal, Metallic, Ambient Occlusion, Height, surface-response, detail, direct-specular, and reflection-probe controls.</li>
+<li>Packed PBR channel layout: R Metallic, G Ambient Occlusion, B Height, and A Smoothness or Roughness. Normal maps remain separate.</li>
+<li>Height-based parallax occlusion mapping with <code>1–64</code> integer steps, grazing-angle stabilization, Parallax Height up to <code>1</code>, and Height Floor controls.</li>
+<li>Signed normal strength from <code>-4</code> to <code>4</code>, supporting inverted tangent-space relief.</li>
+<li>Specular Strength and Reflection Strength ranges from <code>0–4</code>.</li>
+<li>Linked core PBR UV transforms or independent transforms for individual maps.</li>
+<li>Runtime-efficient packed sampling, disabled-feature early-outs, and zero-weight sampling skips for painted layers.</li>
+<li>A themed packed-map creation card that previews channels, requests confirmation, creates a linear PNG beside the surface-color texture when possible, assigns it, and switches the relevant material or painted layer to Packed Map without removing separate-map assignments.</li>
+<li>Automatic Detail Packed PBR creation when enabled detail maps are packed on Surface or Nature PBR materials.</li>
+<li>Inspector channel guides and performance guidance for expensive painted Separate Maps configurations.</li>
+</ul>
+<h3 id="grunge-and-emission">Grunge and emission<a aria-label="Link to Grunge and emission" class="heading-anchor" href="#grunge-and-emission">#</a></h3>
+<ul>
+<li>Grunge projection, masking, color, opacity, and blend controls on supported shaders.</li>
+<li>Normal grunge compositing for placing the masked grunge result over the underlying surface.</li>
+<li>Grunge influence across supported PBR responses, including signed height embossing and carving.</li>
+<li>Texture-driven emission with masks, UV controls, source shaping, animation, HDR color, and strength controls.</li>
+<li>Unclamped Unity Meta emission output for Progressive Lightmapper baking and Bakery-compatible alpha-meta support.</li>
+</ul>
+<h3 id="vertex-painting">Vertex painting<a aria-label="Link to Vertex painting" class="heading-anchor" href="#vertex-painting">#</a></h3>
+<ul>
+<li>Four independently authored Base, Red, Green, and Blue material layers.</li>
+<li>Independent Albedo, tint, UVs, PBR map workflow, surface-response workflow, linked UV state, maps, strengths, Parallax Height, and Height Floor per PBR layer.</li>
+<li>Shared integer Parallax Steps across the four painted layers.</li>
+<li>Normalized layer blending across Albedo, Normal, Metallic, Ambient Occlusion, Height, surface response, and texture alpha.</li>
+<li>Recommended Polybrush Texture Paint metadata and a setup helper under <code>Tools &gt; CrowPSX &gt; Polybrush</code>.</li>
+</ul>
+<h3 id="nature-and-terrain">Nature and terrain<a aria-label="Link to Nature and terrain" class="heading-anchor" href="#nature-and-terrain">#</a></h3>
+<ul>
+<li>Anchored Nature wind with wind direction, sway, gusts, leaf flutter, plant variation, flex shaping, mask falloff, and presets.</li>
+<li>Local Height, Vertex Alpha, UV2 Y, and texture-mask anchoring sources, with channel selection and inversion for the mask texture.</li>
+<li>Matching realtime deformation in Forward and ShadowCaster passes; baked output uses the static rest pose.</li>
+<li>TerrainLayer Albedo, Normal, Metallic, Smoothness, holes, additional-layer rendering, distant basemaps, lighting, color, and pixel-snapping support.</li>
+</ul>
+<h3 id="particles-and-decals">Particles and decals<a aria-label="Link to Particles and decals" class="heading-anchor" href="#particles-and-decals">#</a></h3>
+<ul>
+<li>Particle flipbooks, masks, secondary textures, packed VFX maps, custom particle streams, soft-particle fading, dissolve, distortion, intersection effects, distance/camera fades, and presets.</li>
+<li>Grab Distortion framebuffer refraction in Multi-Pass with a stereo-safe heat-ripple fallback in Single Pass Instanced and Multiview.</li>
+<li>Depth-volume projection with Normal, Premultiplied, additive-family, and Multiply blending suitable for graffiti, stickers, lighting, and stylized volume effects.</li>
+<li>Independent Unlit Strength and unclamped HDR Emission Color/Strength for depth-volume decals.</li>
+<li>Stencil presets for Block Decals, Respect Blockers, Receiver, and Test Receivers.</li>
+</ul>
+<h3 id="procedural-skybox">Procedural skybox<a aria-label="Link to Procedural skybox" class="heading-anchor" href="#procedural-skybox">#</a></h3>
+<ul>
+<li>HDR zenith, horizon, and ground gradients with exposure, color grading, and HDR-safe posterization.</li>
+<li>Multiple textured celestial bodies with independent placement, shape, tint, glow, and mask controls.</li>
+<li>Analytic moon phases with eight presets, phase cycle, terminator rotation and softness, earthshine, phase-aware glow, and full-disc star occlusion.</li>
+<li>Texture Alpha, Brightness (Luminance), and Alpha × Brightness celestial mask modes.</li>
+<li>Spherical star fields with configurable population, appearance, distribution, and height fading.</li>
+<li>One or two cloud layers with masks, self-shading, and lighting from the strongest enabled above-horizon Sun or Moon.</li>
+<li>Transparent surroundings/skyline rendering.</li>
+<li>Global orientation, automatic rotation, frame-stepped movement, and independent motion for celestial bodies, stars, clouds, and surroundings.</li>
+<li>Environment lighting controls that hold Unity's ambient source on Skybox, optionally filter or tint the generated ambient probe, and apply to the active scene automatically or on demand.</li>
+<li>Sky-specific diagnostics for invisible settings, costly combinations, mask configuration, cloud lighting, and motion.</li>
+</ul>
+<h3 id="material-authoring-tools">Material authoring tools<a aria-label="Link to Material authoring tools" class="heading-anchor" href="#material-authoring-tools">#</a></h3>
+<ul>
+<li>Custom themed material inspectors with search, modified-only filtering, foldable groups, reset controls, contextual descriptions, and guarded high-cost ranges.</li>
+<li>Material diagnostics with severity grouping and actionable repair suggestions.</li>
+<li>Built-in and user-defined material presets.</li>
+<li>Material Manager for collecting, filtering, converting, copying, resetting, and batch-editing compatible materials.</li>
+<li>Batch rendering, lighting, preset, and VR Profile operations.</li>
+<li>Outline Normals baking, from the material inspector or <code>Tools &gt; CrowPSX</code>, which writes position-welded smooth normals into UV4 so an inverted hull stays closed across hard edges, leaving surface shading untouched and the original mesh restorable.</li>
+<li>Installation validator and shader/material schema migration support.</li>
+</ul>
+<h3 id="compatibility-and-package-content">Compatibility and package content<a aria-label="Link to Compatibility and package content" class="heading-anchor" href="#compatibility-and-package-content">#</a></h3>
+<ul>
+<li>Unity 2022.3 LTS or newer.</li>
+<li>Built-in Render Pipeline support with Forward lighting, shadows, fog, lightmaps, reflection probes, Light Probe Proxy Volumes, and required Unity variants.</li>
+<li>Universal Render Pipeline support from the same shader assets, including its forward light loop, terrain contract, Single Pass Instanced and Multiview XR modes, and opaque-texture refraction.</li>
+<li>Baked Indirect, Shadowmask, and Subtractive mixed lighting on Surface, Vertex Painting, Nature, and Terrain materials in both render pipelines.</li>
+<li>Progressive Lightmapper HDR emission and transparency extraction through dedicated lightweight Meta passes.</li>
+<li>Bakery alpha-meta compatibility on supported surface shaders in both render pipelines.</li>
+<li>A self-contained playable demonstration scene with namespaced first-person sample scripts, referencing no content outside the package.</li>
+<li>Third-party notices, setup documentation, shader reference, workflow guides, and troubleshooting documentation.</li>
+</ul>
+<h2 id="before-you-start">Before you start<a aria-label="Link to Before you start" class="heading-anchor" href="#before-you-start">#</a></h2>
+<p>Run <strong>Tools &gt; CrowPSX &gt; Validate Installation</strong> after importing the package, and back up your project before a bulk material operation.</p>
+</div></article><nav aria-label="Previous and next documentation pages" class="doc-pager"><a href="/crowpsx/docs/troubleshooting/"><small>Previous</small><span>Troubleshooting </span></a><span></span></nav><div class="doc-footnote">CrowPSX 1.1.0 · CrowBite<br/>Documentation from the included package manuals.</div></div><aside aria-label="On this page" class="docs-toc"><p>ON THIS PAGE</p><a href="#1-1-0-unity-6-compatibility">1.1.0: Unity 6 Compatibility</a><a href="#1-0-0-initial-public-release">1.0.0: Initial Public Release</a><a href="#before-you-start">Before you start</a><div class="toc-help"><p>Something not working?</p><a href="/crowpsx/docs/troubleshooting/">Troubleshooting →</a></div></aside></div></main><dialog id="lightbox"><button aria-label="Close image" class="close">×</button><img alt=""/><p></p></dialog></body></html>

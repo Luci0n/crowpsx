@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Lighting &amp; retro controls | CrowPSX Documentation</title><meta content="Lighting modes, vertex snapping, affine warp, outlines, and rendering." name="description"/><meta content="#11120f" name="theme-color"/><meta content="index,follow" name="robots"/><link href="https://luci0n.github.io/crowpsx/docs/surface-controls/" rel="canonical"/><meta content="website" property="og:type"/><meta content="Lighting &amp; retro controls | CrowPSX Documentation" property="og:title"/><meta content="Lighting modes, vertex snapping, affine warp, outlines, and rendering." property="og:description"/><meta content="https://luci0n.github.io/crowpsx/docs/surface-controls/" property="og:url"/><meta content="https://luci0n.github.io/crowpsx/assets/street.webp" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><link href="/crowpsx/favicon.svg" rel="icon" type="image/svg+xml"/><link href="/crowpsx/style.css" rel="stylesheet"/><script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebSite", "name": "CrowPSX", "url": "https://luci0n.github.io/crowpsx", "publisher": {"@type": "Organization", "name": "CrowBite"}}]</script><link href="/crowpsx/docs.css" rel="stylesheet"/><script defer="" src="/crowpsx/docs.js"></script><meta content="/crowpsx" name="site-base"/><link href="/crowpsx/refresh.css" rel="stylesheet"/></head><body class="docs-body"><a class="skip" href="#main">Skip to content</a><main id="main"><header class="docs-header"><a aria-label="CrowPSX home" class="brand" href="/crowpsx/">Crow<span>PSX</span></a><a class="docs-wordmark" href="/crowpsx/docs/">Documentation</a><span class="docs-version">v1.1.0</span><div class="docs-search"><label class="sr-only" for="docs-query">Search documentation</label><span aria-hidden="true">⌕</span><input aria-controls="search-results" aria-expanded="false" autocomplete="off" id="docs-query" placeholder="Search documentation…" type="search"/><kbd>Ctrl K</kbd><div class="search-panel" hidden="" id="search-panel"><p aria-live="polite" id="search-count" role="status"></p><ul aria-label="Search results" id="search-results"></ul></div></div><a class="docs-store" href="https://assetstore.unity.com/packages/vfx/shaders/crowpsx-retro-rendering-shader-suite-395934">Get CrowPSX ↗</a><button aria-controls="docs-sidebar" aria-expanded="false" aria-label="Browse documentation" class="nav-toggle" type="button">☰ <span>Browse docs</span></button></header><div class="docs-layout"><nav aria-label="Documentation" class="docs-sidebar" id="docs-sidebar"><div class="nav-group"><p>START HERE</p><a href="/crowpsx/docs/">Overview</a><a href="/crowpsx/docs/installation/">Installation</a><a href="/crowpsx/docs/getting-started/">Getting started</a><a href="/crowpsx/docs/render-pipelines/">Render pipelines</a></div><div class="nav-group"><p>SHADER REFERENCE</p><a href="/crowpsx/docs/surface-shaders/">Surface shaders</a><a href="/crowpsx/docs/nature/">Nature &amp; wind</a><a href="/crowpsx/docs/terrain/">Terrain</a><a href="/crowpsx/docs/particles/">Particles</a><a href="/crowpsx/docs/decals/">Depth-volume decals</a><a href="/crowpsx/docs/skybox/">Procedural skybox</a></div><div class="nav-group"><p>MATERIAL WORKFLOWS</p><a aria-current="page" href="/crowpsx/docs/surface-controls/">Lighting &amp; retro controls</a><a href="/crowpsx/docs/pbr-workflows/">PBR workflows</a><a href="/crowpsx/docs/vertex-painting/">Vertex painting</a><a href="/crowpsx/docs/material-manager/">Material Manager</a><a href="/crowpsx/docs/baking-transparency/">Baking &amp; transparency</a></div><div class="nav-group"><p>INTEGRATION</p><a href="/crowpsx/docs/vr-stereo/">VR &amp; stereo</a><a href="/crowpsx/docs/demo-scene/">Demo scene</a></div><div class="nav-group"><p>REFERENCE</p><a href="/crowpsx/docs/performance/">Performance</a><a href="/crowpsx/docs/troubleshooting/">Troubleshooting</a><a href="/crowpsx/docs/changelog/">Changelog</a></div><div class="sidebar-footer"><a href="/crowpsx/">← Product website</a><span>Built-in + URP</span></div></nav><div class="docs-page"><div class="doc-breadcrumb"><a href="/crowpsx/docs/">Docs</a><span>/</span><span>Lighting &amp; retro controls</span></div><article class="doc-article"><div class="doc-heading"><p class="eyebrow">MATERIAL WORKFLOWS</p><h1>Lighting &amp; retro controls</h1><p>Lighting modes, vertex snapping, affine warp, outlines, and rendering.</p><span>PACKAGE VERSION 1.1.0</span></div><details class="mobile-toc"><summary>On this page</summary><a href="#color-adjustment">Color Adjustment</a><a href="#lighting">Lighting</a><a href="#retro-geometry">Retro Geometry</a><a href="#outline">Outline</a><a href="#outline-normals-baked-smooth-uv4">Outline normals (Baked Smooth UV4)</a><a href="#rendering">Rendering</a><a href="#grunge-and-emission">Grunge and Emission</a></details><div class="doc-content"><h2 id="color-adjustment">Color Adjustment<a aria-label="Link to Color Adjustment" class="heading-anchor" href="#color-adjustment">#</a></h2>
+<p>Pre-lighting controls affect source Albedo before direct/indirect lighting. Post-lighting controls grade the final combined output. The bake toggle determines whether pre-lighting color correction is exported through the material meta pass.</p>
+<h2 id="lighting">Lighting<a aria-label="Link to Lighting" class="heading-anchor" href="#lighting">#</a></h2>
+<p>Every lit surface, Nature and Vertex Painting shader has three <strong>Realtime Lighting Modes</strong>, plus direct and indirect intensity, ambient/probe intensity, minimum light, stepped lighting and final posterization. The Terrain shader offers Pixel and Vertex.</p>
+<ul>
+<li><strong>Pixel</strong>: lighting, falloff and shadows are all calculated per pixel, like a standard Unity material.</li>
+<li><strong>Vertex</strong>: the classic PS1 look. All realtime lighting, including each light's falloff, is calculated at the mesh vertices and blended across the triangle. It is unshadowed by default; <strong>Main Light Shadows</strong> adds the main directional light's shadow where the pipeline allows it (see below).</li>
+<li><strong>Vertex Hybrid</strong>: each light's shading, including PBR highlights, is calculated at the vertices, but its falloff and shadow are applied per pixel. You keep the vertex-lit look with clean light pools and crisp shadows. Each light is shadowed only by itself, so the sun's shadow never darkens a point or spot light.</li>
+</ul>
+<p>Use ordinary Unity Lights. Their color, intensity, range, cone, culling mask and render mode are all respected, and no extra components, materials or setup are required.</p>
+<p><strong>Light limits.</strong> Vertex mode receives up to eight lights per object; CrowPSX picks the most important automatically (Important before Auto before Not Important, then the brightest and closest). On URP Forward, the URP asset's <strong>Per Object Limit</strong> for additional lights applies instead. In Vertex Hybrid, the four most important point and spot lights get per-pixel falloff and shadows; any beyond that are lit fully per vertex, like Unity's Not Important lights.</p>
+<p><strong>Shadows by pipeline.</strong></p>
+<div aria-label="Lighting &amp; retro controls table" class="doc-table" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th>Built-in</th>
+<th>URP Forward</th>
+<th>URP Forward+ / Deferred+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pixel</td>
+<td>All lights</td>
+<td>All lights</td>
+<td>All lights</td>
+</tr>
+<tr>
+<td>Vertex</td>
+<td>Unshadowed</td>
+<td>Main light (with <strong>Main Light Shadows</strong>)</td>
+<td>Unshadowed</td>
+</tr>
+<tr>
+<td>Vertex Hybrid</td>
+<td>All lights</td>
+<td>All lights</td>
+<td>Main light only</td>
+</tr>
+</tbody>
+</table></div>
+<p>In Vertex mode on Built-in and URP Forward+, all eight lights are blended into one value, so a single light's shadow cannot be separated out. In Vertex Hybrid on URP Forward+ and Deferred+, point and spot lights come from CrowPSX's own light list, which has no access to URP's shadow maps.</p>
+<p><strong>Batching.</strong> In Vertex mode on Built-in and URP Forward+, and in Vertex Hybrid on URP Forward+, each object receives its light selection through per-renderer data. GPU instancing still works, but those objects are not batched by the SRP Batcher. URP Forward uses Unity's own light lists and keeps SRP Batcher compatibility.</p>
+<h2 id="retro-geometry">Retro Geometry<a aria-label="Link to Retro Geometry" class="heading-anchor" href="#retro-geometry">#</a></h2>
+<p>Pixel snapping, affine warp, near-camera reduction, and optional snapped shadow casting. The visible <strong>VR / Stereo Comfort</strong> group provides Off, Comfort, Balanced, and Full profiles plus independent VR Snap and VR Affine strengths. Stereo rendering uses one shared snap displacement for both eyes to preserve binocular disparity across Multi-Pass, Single Pass Instanced, and Multiview.</p>
+<h2 id="outline">Outline<a aria-label="Link to Outline" class="heading-anchor" href="#outline">#</a></h2>
+<p>The six mesh-surface shaders (Default, Lite, PBR, and their Vertex Painting variants) provide an optional inverted-hull silhouette. Width can stay fixed in screen pixels or use physical world units, and an optional start/end distance fade shrinks and fades it out. A UV-transformable texture mask (luminance/R/G/B/A, optionally inverted) controls where the hull appears. <strong>Match Base Color</strong> blends toward the actual sampled surface color, including the blended layer result on Vertex Painting materials. The hull follows CrowPSX vertex wobble. Disabled materials have the outline pass switched off and submit no outline draw; enabled materials add one outline draw.</p>
+<p>The hull is never moved to a second renderer. The outline pass is ordered after the surface pass inside one material and relies on the depth that pass wrote, and nothing guarantees that ordering between two separate renderers.</p>
+<p>Transparent surfaces cannot reliably occlude their own hull because they normally do not write depth; Opaque or Cutout is recommended. Nature is intentionally excluded: its common single-plane alpha cards need texture-silhouette dilation rather than an inverted hull.</p>
+<p>Built-in draws the hull as part of its forward queue, the pass is tagged <code>LightMode = Always</code>, which that pipeline renders unconditionally and late enough to sit on top of opaque geometry. Nothing to set up.</p>
+<p>Universal renders only the tags its passes ask for, and the hull must be drawn <em>after</em> the opaque queue so the geometry that should occlude it has already written depth. It therefore carries its own <code>LightMode = CrowPSXOutline</code> and is drawn by a CrowPSX pass at <code>BeforeRenderingTransparents</code>, requested one of two ways:</p>
+<ul>
+<li><strong>CrowPSX Outline Feature</strong> on a Universal Renderer covers every camera using that renderer.</li>
+<li><strong>CrowPSX Outline Support</strong> on a camera covers one scene without touching any project asset, which is what lets a scene ship with outlines that work on import. It adds the URP-only injector at runtime and does nothing under Built-in.</li>
+</ul>
+<p>Using both is safe: the feature stands down for any camera the injector already covered. The pass records both ways, so it draws under Unity 6's Render Graph and under Compatibility Mode alike, as well as on URP versions that predate Render Graph entirely. Riding one of URP's own tags instead is a tempting shortcut and does not work, <code>SRPDefaultUnlit</code> is requested ahead of <code>UniversalForward</code>, so the hull would be drawn before the geometry that occludes it and overwritten by the opaque draws that follow.</p>
+<p>Code toggling the outline at runtime has to set both LightMode names through <code>Material.SetShaderPassEnabled</code>, which matches on that tag, alongside the <code>_OutlineEnabled</code> property.</p>
+<h2 id="outline-normals-baked-smooth-uv4">Outline normals (Baked Smooth UV4)<a aria-label="Link to Outline normals (Baked Smooth UV4)" class="heading-anchor" href="#outline-normals-baked-smooth-uv4">#</a></h2>
+<p>Hard edges are duplicated vertices. A cube corner is three vertices at the same position, each carrying its own axis-aligned normal, so an inverted hull extrudes each face along a different axis and comes apart into disjoint quads. On screen that reads as short strokes floating near the corners while the rest of the silhouette is missing. Rounded meshes hide the problem, because a smooth normal field still closes the hull.</p>
+<p>Smoothing the mesh's own normals would fix the hull and flatten the shading with it. <strong>Normal Source &gt; Baked Smooth UV4</strong> instead uses a second set of normals that only the outline pass reads.</p>
+<p><strong>What the bake produces.</strong> CrowPSX copies the mesh, groups vertices that share a position, averages their distinct normals, and writes the result to UV4, <code>TEXCOORD3</code> in the shaders. Welding is positional, with a tolerance scaled to the mesh bounds. Positions, lighting normals, vertex colors and lightmap UVs are untouched, so shading is unchanged; the extra channel is read only while Normal Source is set to Baked Smooth UV4, and ignored everywhere else.</p>
+<p><strong>How the normal is stored.</strong> Not as an object-space direction, but as coordinates in each vertex's own tangent frame, flagged by <code>w = 2</code>. Static batching and GPU skinning rewrite <code>NORMAL</code> and <code>TANGENT</code> into another space while copying UV channels through verbatim, so a direction parked in UV4 would quietly stop matching the geometry it belongs to the moment either applied. Tangent-frame coordinates travel with the basis and stay correct in both cases. Tangents are generated on the generated copy when the source mesh has none, since the encoding needs them; a vertex whose tangent is still unusable falls back to an object-space direction flagged <code>w = 1</code>, which the shaders also read, that is the encoding meshes baked before this change carry, and the inspector flags them so they can be baked again.</p>
+<p><strong>Baking and restoring.</strong> In the material inspector, <strong>Source Renderer</strong> defaults to the selected object's renderer and only appears while Normal Source is Baked Smooth UV4. <strong>Bake Outline Normals</strong> bakes that renderer in place: the generated mesh is assigned to it and its materials are switched to Baked Smooth UV4. <strong>Restore Source Mesh</strong> puts the recorded original back without deleting the generated asset. Below the buttons the section reports which mesh is being drawn, or warns that it has no UV4 or carries the older encoding. <code>Tools &gt; CrowPSX &gt; Outline Normals</code> runs the same two actions across every MeshFilter and SkinnedMeshRenderer under the current selection.</p>
+<p><strong>Generated assets.</strong> Each mesh is written beside its source model as <code>&lt;model&gt;_&lt;mesh&gt;_OutlineNormals.asset</code>. Two labels record the original mesh reference and the source's dependency hash. Restore resolves the original through the first; re-baking reuses the existing asset when both still match, and updates that same asset in place when the model changed, so bake/restore cycles never accumulate numbered duplicates.</p>
+<p><strong>Requirements and limits.</strong> Meshes need <strong>Read/Write</strong> enabled in the model importer. Only imported mesh assets can be baked: the generated copy is saved beside its source model, so a scene-only or procedural mesh has nowhere to be written and no stable identity for Restore to resolve, and the baker refuses it rather than putting the asset somewhere else. Welding is purely positional, so surfaces that merely touch are averaged together, which closes the hull across them whether or not that was intended.</p>
+<h2 id="rendering">Rendering<a aria-label="Link to Rendering" class="heading-anchor" href="#rendering">#</a></h2>
+<p>Opaque/Cutout/Transparent modes; source alpha and separate Alpha Map; Bake Transparency Map; alpha contrast/power/bias, clipping, and dithering; Cull, Z Write, Z Test, depth bias, queue, stencil, and GPU instancing.</p>
+<h2 id="grunge-and-emission">Grunge and Emission<a aria-label="Link to Grunge and Emission" class="heading-anchor" href="#grunge-and-emission">#</a></h2>
+<p>Available only on shaders that declare the corresponding properties. The inspector hides unsupported sections automatically.</p>
+<p>The Grunge layer and the Grunge Mask each choose a <strong>Projection Type</strong>, presented the same way as the Depth Volume decal's:</p>
+<div aria-label="Lighting &amp; retro controls table" class="doc-table" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Cost</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UV</td>
+<td>1 fetch</td>
+<td>Follows the mesh texture coordinates. The default.</td>
+</tr>
+<tr>
+<td>Planar</td>
+<td>1 fetch</td>
+<td>Projects from one direction (X, Y, or Z). Surfaces facing away from it stretch.</td>
+</tr>
+<tr>
+<td>Biplanar</td>
+<td>2 fetches</td>
+<td>Blends the selected pair (XY, XZ, or YZ) using the surface normal.</td>
+</tr>
+<tr>
+<td>Triplanar</td>
+<td>3 fetches</td>
+<td>Blends all three directions using the surface normal.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Planar and Biplanar sample only their enabled axes, so they are genuinely cheaper than Triplanar rather than Triplanar with some weights zeroed. Projection Blend Sharpness applies to Biplanar and Triplanar only; Planar has nothing to blend between. Use Local Position stays available in every mode, because the breakup and streak noise are driven from that position even under UV mapping.</p>
+<p>Grunge follows height parallax in every projection type. UV mapping follows it through the displaced texture coordinates; the projected types are addressed by position instead, so parallax additionally publishes its displacement in world space and the projection position picks it up. This also covers the breakup and streak noise, which are position-addressed even under UV mapping.</p>
+</div></article><nav aria-label="Previous and next documentation pages" class="doc-pager"><a href="/crowpsx/docs/skybox/"><small>Previous</small><span>Procedural skybox </span></a><a href="/crowpsx/docs/pbr-workflows/"><small>Next</small><span>PBR workflows →</span></a></nav><div class="doc-footnote">CrowPSX 1.1.0 · CrowBite<br/>Documentation from the included package manuals.</div></div><aside aria-label="On this page" class="docs-toc"><p>ON THIS PAGE</p><a href="#color-adjustment">Color Adjustment</a><a href="#lighting">Lighting</a><a href="#retro-geometry">Retro Geometry</a><a href="#outline">Outline</a><a href="#outline-normals-baked-smooth-uv4">Outline normals (Baked Smooth UV4)</a><a href="#rendering">Rendering</a><a href="#grunge-and-emission">Grunge and Emission</a><div class="toc-help"><p>Something not working?</p><a href="/crowpsx/docs/troubleshooting/">Troubleshooting →</a></div></aside></div></main><dialog id="lightbox"><button aria-label="Close image" class="close">×</button><img alt=""/><p></p></dialog></body></html>

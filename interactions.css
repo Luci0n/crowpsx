@@ -1,0 +1,49 @@
+.icon{width:20px;height:20px;display:inline-block;flex:none;vertical-align:middle;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.home-page #features .feature-list article>span{color:#d8b782;line-height:1}
+.home-page #features .feature-list article>span .icon{width:23px;height:23px}
+.home-page .editor-category{display:flex;align-items:center;gap:9px}
+.home-page .editor-category .icon{width:15px;height:15px}
+.home-page .editor-steps li::before{content:none}
+.home-page .editor-steps li>.icon{width:18px;height:18px;margin-top:3px;color:#c4a16a}
+.image-open>span .icon{width:16px;height:16px}
+.button .icon,.text-link .icon,.editor-doc .icon{width:17px;height:17px;transition:transform .25s ease}
+.text-link{display:inline-flex;align-items:center;gap:9px}
+.button:hover .icon,.button:focus-visible .icon,.text-link:hover .icon,.editor-doc:hover .icon{transform:translate(2px,-2px)}
+.story-arrow .icon{width:22px;height:22px}
+.faq summary{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.faq summary::after{display:none}
+.faq summary>.icon{width:18px;height:18px;color:#c8ad81;transition:transform .25s ease}
+.faq details[open] summary>.icon{transform:rotate(180deg)}
+header nav a{position:relative;transition:color .2s ease}
+header nav a::after{content:'';position:absolute;bottom:-7px;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+header nav a:hover::after,header nav a:focus-visible::after{transform:scaleX(1)}
+.button{transition:background .22s ease,box-shadow .22s ease,transform .22s ease}
+.image-open{cursor:zoom-in}
+.image-open>span{transition:background .25s ease,color .25s ease,transform .25s ease}
+.image-open:hover>span{transform:translate(1px,-1px);color:#f7d7a2}
+.story{transition:border-color .25s ease}
+.story .story-arrow{transition:transform .25s ease}
+.story:hover{border-color:#bba07477}
+.story:hover .story-arrow{transform:translate(3px,-3px)}
+.home-page .feature-list article,.home-page .editor-steps li{transition:border-color .25s ease}
+.home-page .feature-list article:hover,.home-page .editor-steps li:hover{border-color:#bba07477}
+[data-reveal]{opacity:0;transform:translate3d(0,18px,0);transition:opacity .6s ease var(--reveal-delay,0ms),transform .6s cubic-bezier(.2,.7,.2,1) var(--reveal-delay,0ms)}
+[data-reveal].is-visible{opacity:1;transform:none}
+@keyframes hero-copy-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.home-page .hero-copy{animation:hero-copy-enter .6s cubic-bezier(.2,.7,.2,1)}
+@keyframes lightbox-enter{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes backdrop-enter{from{background:#0000}to{background:#050709ed}}
+#lightbox[open]{animation:lightbox-enter .22s ease-out}
+#lightbox[open]::backdrop{background:#050709ed;animation:backdrop-enter .22s ease-out}
+#lightbox .close{display:grid;place-items:center;transition:background .2s ease,transform .2s ease}
+#lightbox .close:hover{transform:rotate(90deg)}
+#lightbox .close .icon{width:22px;height:22px}
+.faq details[open]>p{animation:lightbox-enter .2s ease-out}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}[data-reveal]{opacity:1!important;transform:none!important}.button:hover,.image-open:hover img,.button:hover .icon,.text-link:hover .icon,.editor-doc:hover .icon,.story:hover .story-arrow,#lightbox .close:hover{transform:none!important}}
+
+/* Image controls stay readable without sitting directly on the picture. */
+.home-page main .image-open>span,.home-page main .image-open>span.editor-expand{display:grid;place-items:center;position:absolute;right:16px;bottom:16px;width:40px;height:40px;border-radius:50%;border:1px solid #ffffff26;background:#101216d9;color:#f3eee5;backdrop-filter:blur(10px);text-shadow:none;opacity:0;transform:translateY(4px);transition:opacity .2s ease,transform .2s ease,background .2s ease;pointer-events:none}
+.home-page main .image-open>span .icon{width:20px;height:20px;stroke-width:1.8}
+.home-page main .image-open:hover>span,.home-page main .image-open:focus-visible>span{opacity:1;transform:none;background:#16191fed;color:#fff}
+@media(hover:none),(pointer:coarse){.home-page main .image-open>span{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.home-page main .image-open>span{transform:none}}
